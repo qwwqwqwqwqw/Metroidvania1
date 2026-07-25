@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bek35bmoas0vr"]
 
-[ext_resource type="Texture2D" uid="uid://vpb1xuym6k8h" path="res://icon.svg" id="1_rupst"]
+[ext_resource type="Texture2D" uid="uid://kgrsxcprrcg6" path="res://游戏加载画面.png" id="1_rupst"]
 
 [node name="Node2D" type="Node2D" unique_id=1085461763]
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=446502699]
-position = Vector2(217, 120)
+[node name="游戏加载画面" type="Sprite2D" parent="." unique_id=575844372]
+position = Vector2(240.50005, 135)
+scale = Vector2(0.21172751, 0.17022038)
 texture = ExtResource("1_rupst")

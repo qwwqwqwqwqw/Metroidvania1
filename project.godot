@@ -13,7 +13,7 @@ config_version=5
 config/name="银河恶魔城"
 run/main_scene="uid://bek35bmoas0vr"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://kgrsxcprrcg6"
 
 [display]
 
