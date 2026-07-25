@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bjtqsoalxyjih"]
+
+[ext_resource type="Script" uid="uid://bc28ky2wo7olg" path="res://玩家/脚本/player.gd" id="1_lspqa"]
+[ext_resource type="Script" uid="uid://cid4o4557vmov" path="res://玩家/状态/idle.gd" id="2_n6e2d"]
+[ext_resource type="Script" uid="uid://dudcai868xxu5" path="res://玩家/状态/run.gd" id="3_x8mbe"]
+
+[sub_resource type="Gradient" id="Gradient_1bej5"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lspqa"]
+gradient = SubResource("Gradient_1bej5")
+width = 18
+height = 48
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lspqa"]
+size = Vector2(18, 48)
+
+[node name="玩家" type="CharacterBody2D" unique_id=248145941]
+script = ExtResource("1_lspqa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602917418]
+position = Vector2(0, -24)
+texture = SubResource("GradientTexture2D_lspqa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1050082777]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_lspqa")
+
+[node name="States" type="Node" parent="." unique_id=2001091204]
+
+[node name="idle" type="Node" parent="States" unique_id=1471558162]
+script = ExtResource("2_n6e2d")
+
+[node name="run" type="Node" parent="States" unique_id=388930855]
+script = ExtResource("3_x8mbe")

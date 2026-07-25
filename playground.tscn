@@ -1,10 +1,73 @@
 [gd_scene format=3 uid="uid://bek35bmoas0vr"]
 
-[ext_resource type="Texture2D" uid="uid://kgrsxcprrcg6" path="res://游戏加载画面.png" id="1_rupst"]
+[ext_resource type="PackedScene" uid="uid://bjtqsoalxyjih" path="res://玩家/player.tscn" id="1_rupst"]
 
-[node name="Node2D" type="Node2D" unique_id=1085461763]
+[sub_resource type="Gradient" id="Gradient_edjgo"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[node name="游戏加载画面" type="Sprite2D" parent="." unique_id=575844372]
-position = Vector2(240.50005, 135)
-scale = Vector2(0.21172751, 0.17022038)
-texture = ExtResource("1_rupst")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rupst"]
+gradient = SubResource("Gradient_edjgo")
+width = 32
+height = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wt17y"]
+size = Vector2(31.967678, 32)
+
+[node name="Playground" type="Node2D" unique_id=1085461763]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=790706108]
+position = Vector2(239.00002, 259)
+scale = Vector2(15.46875, 1)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=632099911]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=803215657]
+position = Vector2(0.016159058, 0)
+shape = SubResource("RectangleShape2D_wt17y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=403286143]
+position = Vector2(4.2500076, 137.5)
+scale = Vector2(0.79687476, 8.59375)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2" unique_id=299809400]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D" unique_id=990334328]
+shape = SubResource("RectangleShape2D_wt17y")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1172731716]
+position = Vector2(471.00006, 135.5)
+scale = Vector2(0.82812464, 8.718751)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D3" unique_id=1234406255]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D3/StaticBody2D" unique_id=1044994752]
+position = Vector2(-0.90566766, -0.05818182)
+shape = SubResource("RectangleShape2D_wt17y")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1134811801]
+position = Vector2(269, 240.75)
+scale = Vector2(0.82812464, 2.1718755)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D4" unique_id=82388566]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D4/StaticBody2D" unique_id=819728886]
+position = Vector2(-0.90566766, -0.05818182)
+shape = SubResource("RectangleShape2D_wt17y")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=63465419]
+position = Vector2(153.99998, 240)
+scale = Vector2(0.82812464, 2.1718755)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D5" unique_id=1206297002]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D5/StaticBody2D" unique_id=528651684]
+position = Vector2(-0.90566766, -0.05818182)
+shape = SubResource("RectangleShape2D_wt17y")
+
+[node name="玩家" parent="." unique_id=248145941 instance=ExtResource("1_rupst")]
+position = Vector2(220, 203)
