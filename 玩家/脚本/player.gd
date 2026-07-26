@@ -2,7 +2,19 @@ class_name  Player extends CharacterBody2D
 
 const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
 
-var jumpTimes:int = 2
+
+#代码区域：准备就绪
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_stand: CollisionShape2D = $CollisionStand
+@onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var one_way_plat_form_shapecast: ShapeCast2D = $OneWayPlatFormShapecast
+#代码区域结束
+
+
+
+
+var jumpTimes:int = 1
 
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
@@ -45,7 +57,7 @@ func _physics_process(_delta: float) -> void:
 	if !self.is_on_floor():
 		velocity.y+=gravity*_delta
 	else:
-		jumpTimes=2
+		jumpTimes=1
 	move_and_slide()
 	change_state(currentState.physics_process(_delta))
 	
@@ -105,6 +117,13 @@ func update_direction()->void:
 	var x_axis=Input.get_axis("left","right")
 	var y_axis=Input.get_axis("up","down")
 	direction=Vector2(x_axis,y_axis)
+	
+	if pre_direction != direction:
+		if direction.x < 0:
+			sprite_2d.flip_h = true
+		elif direction.x > 0:
+			sprite_2d.flip_h = false
+	
 	pass
 	
 

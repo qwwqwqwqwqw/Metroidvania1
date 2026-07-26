@@ -8,6 +8,7 @@ func init() -> void:
 #当进入状态是会发生什么	
 func enter()-> void:
 	print("enter!run")
+	player.animation_player.play("run")
 	pass
 	
 #当退出状态时会发生什么	
@@ -30,12 +31,16 @@ func process(_delta: float)-> PlayerState:
 	#print("process:",name,_delta)
 	if player.direction.x == 0:
 		return idle
+	elif player.direction.y > 0.5:
+		return crouch
 	return null
 	
 #每次物理过程更新时会发生的事情	
 func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
-	player.velocity.x=player.direction.x * player.move_speed
+	if player.direction.x != 0:
+		player.velocity.x=player.direction.x * player.move_speed
+		
 	if !player.is_on_floor():
 		return fall
 	return null

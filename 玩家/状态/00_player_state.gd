@@ -9,6 +9,8 @@ var nextState: PlayerState
 @onready var run:PlayerstateRun=%run
 @onready var jump:PlayerstateJump=%jump
 @onready var fall:PlayerstateFall=%fall
+@onready var crouch: PlayerstateCrouch = %crouch
+
 #代码区域
 
 #当状态被初始化是会发生什么

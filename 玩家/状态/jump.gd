@@ -9,6 +9,7 @@ func init() -> void:
 #当进入状态是会发生什么	
 func enter()-> void:
 	print("enter!jump")
+	player.animation_player.play("jump")
 	player.add_debug_indicator(Color.AQUAMARINE)
 	player.jumpTimes-=1
 	player.velocity.y = -player.jump_speed
@@ -24,7 +25,7 @@ func exit()-> void:
 #处理输入发生的事件
 func handle_input(event: InputEvent)-> PlayerState:
 	if event.is_action_released("jump"):
-		player.velocity.y *= 0.7
+		player.velocity.y *= 0.5
 		return fall
 	return null
 	
