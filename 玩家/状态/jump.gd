@@ -1,39 +1,46 @@
-class_name PlayerstateIdle  extends PlayerState
+class_name PlayerstateJump  extends PlayerState
+
+
 
 func init() -> void:
-	print("init!idle")
+	print("init!jump")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!idle")
+	print("enter!jump")
+	player.add_debug_indicator(Color.AQUAMARINE)
+	player.jumpTimes-=1
+	player.velocity.y = -player.jump_speed
 	pass
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!idle")
+	print("exit!jump")
+	player.add_debug_indicator(Color.LAWN_GREEN)
 	pass
 
 
 #处理输入发生的事件
 func handle_input(event: InputEvent)-> PlayerState:
-	if event.is_action_pressed("jump"):
-		return jump
+	if event.is_action_released("jump"):
+		player.velocity.y *= 0.7
+		return fall
 	return null
-	
 	
 
 #状态过程中发生的事
 func process(_delta: float)-> PlayerState:
 	#print("process:",name,_delta)
-	if player.direction.x!=0:
-		return run
+
 	return null
 	
 #每次物理过程更新时会发生的事情	
 func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
-	player.velocity.x=0
-	if !player.is_on_floor():
+	if player.is_on_floor():
+		return idle
+	if player.velocity.y >= 0:
 		return fall
+	player.velocity.x=player.direction.x * player.move_speed
 	return null

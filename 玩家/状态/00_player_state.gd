@@ -5,7 +5,10 @@ var player: Player
 var nextState: PlayerState
 
 #代码区域： 状态引用
-#包含对其他状态的引用
+@onready var idle:PlayerstateIdle=%idle
+@onready var run:PlayerstateRun=%run
+@onready var jump:PlayerstateJump=%jump
+@onready var fall:PlayerstateFall=%fall
 #代码区域
 
 #当状态被初始化是会发生什么

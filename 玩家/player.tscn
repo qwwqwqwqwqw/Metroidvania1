@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bc28ky2wo7olg" path="res://玩家/脚本/player.gd" id="1_lspqa"]
 [ext_resource type="Script" uid="uid://cid4o4557vmov" path="res://玩家/状态/idle.gd" id="2_n6e2d"]
 [ext_resource type="Script" uid="uid://dudcai868xxu5" path="res://玩家/状态/run.gd" id="3_x8mbe"]
+[ext_resource type="Script" uid="uid://r8woq4aw87ek" path="res://玩家/状态/jump.gd" id="4_x8mbe"]
+[ext_resource type="Script" uid="uid://x6ic7ett7b3v" path="res://玩家/状态/fall.gd" id="5_4a03n"]
 
 [sub_resource type="Gradient" id="Gradient_1bej5"]
 
@@ -28,7 +30,27 @@ shape = SubResource("RectangleShape2D_lspqa")
 [node name="States" type="Node" parent="." unique_id=2001091204]
 
 [node name="idle" type="Node" parent="States" unique_id=1471558162]
+unique_name_in_owner = true
 script = ExtResource("2_n6e2d")
 
 [node name="run" type="Node" parent="States" unique_id=388930855]
+unique_name_in_owner = true
 script = ExtResource("3_x8mbe")
+
+[node name="jump" type="Node" parent="States" unique_id=1136468691]
+unique_name_in_owner = true
+script = ExtResource("4_x8mbe")
+
+[node name="fall" type="Node" parent="States" unique_id=1596098867]
+unique_name_in_owner = true
+script = ExtResource("5_4a03n")
+
+[node name="Label" type="Label" parent="." unique_id=1931238803]
+offset_left = -23.000002
+offset_top = -78.0
+offset_right = 25.673498
+offset_bottom = -61.0
+scale = Vector2(0.95380265, 1.1172019)
+theme_override_font_sizes/font_size = 12
+text = "玩家"
+horizontal_alignment = 1

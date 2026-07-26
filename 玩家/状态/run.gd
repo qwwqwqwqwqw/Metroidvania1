@@ -1,5 +1,6 @@
 class_name PlayerstateRun  extends PlayerState
 
+
 func init() -> void:
 	print("init!run")
 	pass
@@ -16,9 +17,9 @@ func exit()-> void:
 
 
 #处理输入发生的事件
-func handle_input(_envent: InputEvent)-> PlayerState:
-	if _envent.is_action_released("left")||_envent.is_action_released("right"):
-		return $"../idle"
+func handle_input(event: InputEvent)-> PlayerState:
+	if event.is_action_pressed("jump"):
+		return jump
 	
 	
 	return null
@@ -27,9 +28,14 @@ func handle_input(_envent: InputEvent)-> PlayerState:
 #状态过程中发生的事
 func process(_delta: float)-> PlayerState:
 	#print("process:",name,_delta)
+	if player.direction.x == 0:
+		return idle
 	return null
 	
 #每次物理过程更新时会发生的事情	
 func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
+	player.velocity.x=player.direction.x * player.move_speed
+	if !player.is_on_floor():
+		return fall
 	return null

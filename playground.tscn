@@ -69,5 +69,17 @@ texture = SubResource("GradientTexture2D_rupst")
 position = Vector2(-0.90566766, -0.05818182)
 shape = SubResource("RectangleShape2D_wt17y")
 
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=36607648]
+position = Vector2(42.000004, 241.99998)
+rotation = -1.12882
+scale = Vector2(0.82812464, 2.1718755)
+texture = SubResource("GradientTexture2D_rupst")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D6" unique_id=1165058064]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D6/StaticBody2D" unique_id=1225151274]
+position = Vector2(-0.90566766, -0.05818182)
+shape = SubResource("RectangleShape2D_wt17y")
+
 [node name="玩家" parent="." unique_id=248145941 instance=ExtResource("1_rupst")]
 position = Vector2(220, 203)
