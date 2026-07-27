@@ -72,7 +72,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.6, 0.79999995),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [24, 25, 26, 27, 28]
@@ -109,8 +109,11 @@ _data = {
 size = Vector2(16, 3)
 
 [node name="玩家" type="CharacterBody2D" unique_id=248145941]
+z_index = 1
 collision_layer = 0
 collision_mask = 3
+floor_max_angle = 1.0471976
+floor_snap_length = 1.5
 script = ExtResource("1_lspqa")
 
 [node name="States" type="Node" parent="." unique_id=2001091204]
@@ -175,3 +178,6 @@ shape = SubResource("RectangleShape2D_8o6wb")
 target_position = Vector2(0, 6)
 max_results = 12
 collision_mask = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1720383693]
+position = Vector2(0, -40)

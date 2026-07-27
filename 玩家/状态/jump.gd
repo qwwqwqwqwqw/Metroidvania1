@@ -10,7 +10,8 @@ func init() -> void:
 func enter()-> void:
 	print("enter!jump")
 	player.animation_player.play("jump")
-	player.add_debug_indicator(Color.AQUAMARINE)
+	player.animation_player.pause()
+	#player.add_debug_indicator(Color.AQUAMARINE)
 	player.jumpTimes-=1
 	player.velocity.y = -player.jump_speed
 	pass
@@ -18,7 +19,7 @@ func enter()-> void:
 #当退出状态时会发生什么	
 func exit()-> void:
 	print("exit!jump")
-	player.add_debug_indicator(Color.LAWN_GREEN)
+	#player.add_debug_indicator(Color.LAWN_GREEN)
 	pass
 
 
@@ -33,7 +34,7 @@ func handle_input(event: InputEvent)-> PlayerState:
 #状态过程中发生的事
 func process(_delta: float)-> PlayerState:
 	#print("process:",name,_delta)
-
+	set_jump_frame()
 	return null
 	
 #每次物理过程更新时会发生的事情	
@@ -45,3 +46,9 @@ func physics_process(_delta: float)-> PlayerState:
 		return fall
 	player.velocity.x=player.direction.x * player.move_speed
 	return null
+
+
+func set_jump_frame() -> void:
+	var frame: float = remap(player.velocity.y, -player.jump_speed, 0.0, 0.0, 0.5)
+	player.animation_player.seek(frame, true)
+	pass

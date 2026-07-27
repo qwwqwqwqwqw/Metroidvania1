@@ -18,6 +18,7 @@ var jumpTimes:int = 1
 
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
+@export var max_fall_speed: float=600.0
 #代码区域：状态机所需要的值
 var states: Array[PlayerState]
 var currentState: PlayerState:
@@ -54,8 +55,10 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	
+	
 	if !self.is_on_floor():
 		velocity.y+=gravity*_delta
+		velocity.y = clamp(velocity.y, -1000.0, max_fall_speed)
 	else:
 		jumpTimes=1
 	move_and_slide()
