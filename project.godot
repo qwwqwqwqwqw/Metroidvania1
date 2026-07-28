@@ -11,9 +11,20 @@ config_version=5
 [application]
 
 config/name="银河恶魔城"
-run/main_scene="uid://d1iv3nnkeq0w"
+run/main_scene="uid://dc2m2cv5i7d8d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://kgrsxcprrcg6"
+
+[autoload]
+
+SceneManager="*uid://ce32yau7vsmgo"
+MCPRuntime="*uid://c2idvjjf5j2to"
+BeckettRuntime="*uid://dspgi2nxto4e8"
+
+[beckett]
+
+effort_schema=2
+dock_revealed=true
 
 [display]
 
@@ -22,6 +33,14 @@ window/size/viewport_height=270
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beckett/plugin.cfg")
+
+[global_group]
+
+Player=""
 
 [input]
 
@@ -78,6 +97,7 @@ action={
 
 2d_physics/layer_1="ground"
 2d_physics/layer_2="OneWayPlatform"
+2d_physics/layer_5="player"
 
 [physics]
 

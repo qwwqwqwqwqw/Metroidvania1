@@ -36,6 +36,7 @@ func _ready() -> void:
 	
 	#初始化状态
 	init_states()
+	self.call_deferred("reparent", get_tree().root)
 	
 	pass
 	

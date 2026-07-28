@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ce32yau7vsmgo"]
+
+[ext_resource type="Script" uid="uid://djjgcv3i0ca0n" path="res://00_global/scene_manager/scene_manager.gd" id="1_4wb0k"]
+
+[node name="SceneManager" type="CanvasLayer" unique_id=2008586274]
+script = ExtResource("1_4wb0k")
+
+[node name="Control" type="Control" parent="." unique_id=2065666250]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control" unique_id=152225752]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "测试"
+horizontal_alignment = 1
+vertical_alignment = 1
