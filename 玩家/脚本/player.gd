@@ -34,6 +34,8 @@ var gravity: float=980
 
 func _ready() -> void:
 	
+	if get_tree().get_first_node_in_group("Player") != self:
+		self.queue_free()
 	#初始化状态
 	init_states()
 	self.call_deferred("reparent", get_tree().root)

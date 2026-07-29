@@ -2,19 +2,39 @@
 
 [ext_resource type="Script" uid="uid://djjgcv3i0ca0n" path="res://00_global/scene_manager/scene_manager.gd" id="1_4wb0k"]
 
+[sub_resource type="Gradient" id="Gradient_4wb0k"]
+offsets = PackedFloat32Array(0.333, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.07058824, 0.07058824, 0.07058824, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5q8t"]
+gradient = SubResource("Gradient_4wb0k")
+width = 1440
+height = 810
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="SceneManager" type="CanvasLayer" unique_id=2008586274]
+process_mode = 3
 script = ExtResource("1_4wb0k")
 
-[node name="Control" type="Control" parent="." unique_id=2065666250]
+[node name="Fade" type="Control" parent="." unique_id=2065666250]
+visible = false
+modulate = Color(0.16078432, 0.16078432, 0.16078432, 1)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -1.0
+offset_right = 483.0
+offset_bottom = 269.0
 
-[node name="Label" type="Label" parent="Control" unique_id=152225752]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "测试"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TextureRect" type="TextureRect" parent="Fade" unique_id=739111171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -486.0
+offset_top = -262.5
+offset_right = 471.0
+offset_bottom = 277.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_u5q8t")

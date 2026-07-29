@@ -33,9 +33,8 @@ func _on_player_entered( _n : Node2D) -> void:
 	# 防止物理引擎在场景切换时错误触发 body_entered
 	if _n.global_position.distance_to(global_position) > 100:
 		return
-	SceneManager.transition_scene(target_level,target_area_name,get_offset(_n),"left")
+	SceneManager.transition_scene(target_level,target_area_name,get_offset(_n),get_transition_direction())
 	pass
-	
 	
 func _on_new_scene_ready( target_name: String, offset: Vector2 ) -> void:
 	#位置玩家
@@ -45,7 +44,12 @@ func _on_new_scene_ready( target_name: String, offset: Vector2 ) -> void:
 	pass
 	
 func _on_load_scene_finished() -> void:
+	area_2d.monitoring = false
 	area_2d.body_entered.connect( _on_player_entered )
+	
+	await  get_tree().physics_frame
+	await  get_tree().physics_frame
+	area_2d.monitoring = true
 	pass
 
 func apply_area_settings() -> void:
@@ -88,3 +92,17 @@ func get_offset(player : Node2D ) -> Vector2:
 			offset.y = 48
 	
 	return offset
+
+
+func get_transition_direction() -> String:
+	match location:
+		SIDE.LEFT:
+			return "left"
+		SIDE.RIGHT:
+			return "right"
+		SIDE.TOP:
+			return "up"
+		SIDE.BOTTOM:
+			return "down"
+		_:
+			return "left"

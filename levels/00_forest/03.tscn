@@ -41,4 +41,4 @@ target_level = "uid://cm7nq6gb0ev1i"
 target_area_name = "LevelTransition2"
 
 [node name="玩家" parent="." unique_id=248145941 instance=ExtResource("4_r7adf")]
-position = Vector2(3463, 47)
+position = Vector2(3446, 31)
