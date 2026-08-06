@@ -3,7 +3,6 @@
 [ext_resource type="TileSet" uid="uid://cpui8148mowsc" path="res://levels/tilesets/forest.tres" id="1_biydo"]
 [ext_resource type="Script" uid="uid://dtu1soyslahj5" path="res://general/scripts/level_bounds.gd" id="2_vv2jw"]
 [ext_resource type="PackedScene" uid="uid://bttryqjhpm6m4" path="res://general/level_translation/level_transition.tscn" id="3_vv2jw"]
-[ext_resource type="PackedScene" uid="uid://bjtqsoalxyjih" path="res://玩家/player.tscn" id="4_r7adf"]
 
 [node name="03" type="Node2D" unique_id=720280363]
 
@@ -39,6 +38,3 @@ position = Vector2(-1, 164)
 size = 24
 target_level = "uid://cm7nq6gb0ev1i"
 target_area_name = "LevelTransition2"
-
-[node name="玩家" parent="." unique_id=248145941 instance=ExtResource("4_r7adf")]
-position = Vector2(3446, 31)
