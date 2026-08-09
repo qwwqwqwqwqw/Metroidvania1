@@ -12,6 +12,7 @@ func enter()-> void:
 	player.animation_player.play("crouch")
 	player.collision_stand.disabled=true
 	player.collision_crouch.disabled=false
+	player.jumpTimes = 2
 	pass
 	
 #当退出状态时会发生什么	

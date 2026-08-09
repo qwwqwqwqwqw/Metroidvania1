@@ -14,7 +14,7 @@ const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
 
 
 
-var jumpTimes:int = 1
+var jumpTimes:int = 2
 
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
@@ -62,8 +62,6 @@ func _physics_process(_delta: float) -> void:
 	if !self.is_on_floor():
 		velocity.y+=gravity*_delta
 		velocity.y = clamp(velocity.y, -1000.0, max_fall_speed)
-	else:
-		jumpTimes=1
 	move_and_slide()
 	change_state(currentState.physics_process(_delta))
 	
