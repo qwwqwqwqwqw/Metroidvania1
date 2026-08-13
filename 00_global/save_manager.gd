@@ -8,6 +8,8 @@ const SLOTS: Array[String] = [
 var currrent_slot: int = 0 #存档编号
 var save_data: Dictionary
 var discovered_areas: Array=[] #探索过的区域
+var persistent_data: Dictionary={} #持久性数据
+
 
 func _ready() -> void:
 	await get_tree().process_frame
