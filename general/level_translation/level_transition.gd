@@ -22,7 +22,7 @@ enum SIDE {LEFT, RIGHT, TOP, BOTTOM}
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	
+	apply_area_settings()
 	SceneManager.new_scene_ready.connect( _on_new_scene_ready )
 	SceneManager.load_scene_finishied.connect(_on_load_scene_finished)
 	
@@ -58,7 +58,7 @@ func apply_area_settings() -> void:
 	if not area_2d:
 		return
 	
-	if location ==SIDE.LEFT or location == SIDE.RIGHT:
+	if location == SIDE.LEFT or location == SIDE.RIGHT:
 		area_2d.scale.y = size
 		if location == SIDE.LEFT:
 			area_2d.scale.x = -1
@@ -78,7 +78,7 @@ func get_offset(player : Node2D ) -> Vector2:
 	var offset : Vector2 = Vector2.ZERO
 	var player_pos : Vector2 = player.global_position
 	
-	if location ==SIDE.LEFT or location == SIDE.RIGHT:
+	if location == SIDE.LEFT or location == SIDE.RIGHT:
 		offset.y = player_pos.y - self.global_position.y
 		if location == SIDE.LEFT:
 			offset.x = -12

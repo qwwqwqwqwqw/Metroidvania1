@@ -2,11 +2,11 @@
 
 [ext_resource type="TileSet" uid="uid://cpui8148mowsc" path="res://levels/tilesets/forest.tres" id="1_fvrtv"]
 [ext_resource type="Script" uid="uid://dtu1soyslahj5" path="res://general/scripts/level_bounds.gd" id="3_1pu88"]
-[ext_resource type="PackedScene" uid="uid://bjtqsoalxyjih" path="res://玩家/player.tscn" id="4_qmxb0"]
 [ext_resource type="PackedScene" uid="uid://bttryqjhpm6m4" path="res://general/level_translation/level_transition.tscn" id="4_vhcel"]
 [ext_resource type="PackedScene" uid="uid://dqeety18w1mbh" path="res://levels/props/plant.tscn" id="5_qmxb0"]
 [ext_resource type="Texture2D" uid="uid://60hn3a6ssc1u" path="res://levels/tilesets/sprites/light_stream.jpg" id="6_chwhs"]
 [ext_resource type="Material" uid="uid://cm48jbmuwmnqv" path="res://materialsAndshaders/fog_fade_material.tres" id="7_72pnk"]
+[ext_resource type="PackedScene" uid="uid://ko1odq075211" path="res://general/player_spawn/player_spawn.tscn" id="7_vdj2u"]
 
 [sub_resource type="Gradient" id="Gradient_qmxb0"]
 colors = PackedColorArray(0.5882353, 0.7921569, 0.7411765, 0, 0.5176471, 0.7294118, 0.7019608, 0.59607846)
@@ -288,9 +288,6 @@ size = 15
 location = 1
 target_level = "uid://cm7nq6gb0ev1i"
 
-[node name="玩家" parent="." unique_id=248145941 instance=ExtResource("4_qmxb0")]
-position = Vector2(115, 147)
-
 [node name="ForegroundLayers" type="Node2D" parent="." unique_id=2065607220]
 
 [node name="Foreground2" type="Parallax2D" parent="ForegroundLayers" unique_id=571700261]
@@ -508,3 +505,6 @@ lifetime = 5.0
 randomness = 1.0
 visibility_rect = Rect2(-1750, -200, 3500, 400)
 process_material = SubResource("ParticleProcessMaterial_b436d")
+
+[node name="PlayerSpawn" parent="." unique_id=449131735 instance=ExtResource("7_vdj2u")]
+position = Vector2(148, 226)

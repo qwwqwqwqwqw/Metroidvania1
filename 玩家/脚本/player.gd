@@ -27,6 +27,19 @@ var previousState: PlayerState:
 	get: return states[1]
 #代码区域结束
 
+#玩家统计信息
+var hp: float = 20.0
+var max_hp: float = 20.0
+var dash: bool = false
+var double_jump: bool = false
+var ground_slam: bool = false
+var morph_roll: bool = false
+#----------
+
+
+
+
+
 #代码区域：标准变量
 var direction: Vector2=Vector2.ZERO
 var gravity: float=980

@@ -3,11 +3,16 @@ extends CanvasLayer
 signal load_scene_started
 signal new_scene_ready( target_name: String, offset: Vector2 )
 signal load_scene_finishied
+signal scene_entered( uid: String )
 @onready var fade: Control = $Fade
+
+var current_scene_uid: String
 
 func _ready() -> void:
 	await get_tree().process_frame
 	load_scene_finishied.emit()
+	var current_scene = get_tree().current_scene
+	current_scene_uid = ResourceUID.path_to_uid(current_scene.scene_file_path)
 	pass
 
 func transition_scene( new_scene: String, target_area: String, playerOffset: Vector2, dir: String) -> void:
@@ -16,12 +21,26 @@ func transition_scene( new_scene: String, target_area: String, playerOffset: Vec
 	var fade_pos: Vector2 = get_fade_pos( dir )
 	fade.visible = true
 	
-	
 	load_scene_started.emit()
+	
+	# 异步加载场景，让淡出动画和加载同时进行
+	ResourceLoader.load_threaded_request(new_scene)
+	
 	await fade_screen( fade_pos, Vector2.ZERO)
 	#fade old scene out
 	
-	get_tree().change_scene_to_file( new_scene )
+	# 等待后台加载完成
+	var packed_scene: PackedScene = null
+	while packed_scene == null:
+		packed_scene = ResourceLoader.load_threaded_get(new_scene)
+		if packed_scene == null:
+			await get_tree().process_frame
+	
+	get_tree().change_scene_to_packed( packed_scene )
+	current_scene_uid = ResourceUID.path_to_uid(new_scene)
+	print("新场景uid:",current_scene_uid)
+	scene_entered.emit(current_scene_uid)
+	
 	await get_tree().scene_changed
 	new_scene_ready.emit(target_area, playerOffset )
 	
@@ -56,6 +75,6 @@ func get_fade_pos(dir :String) -> Vector2:
 			pos *= Vector2(1,0)
 		"up":
 			pos *= Vector2(0,-1)
-		"doun":
+		"down":
 			pos *= Vector2(0,1)	
 	return pos

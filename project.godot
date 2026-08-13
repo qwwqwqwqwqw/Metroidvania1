@@ -20,6 +20,7 @@ config/icon="uid://kgrsxcprrcg6"
 SceneManager="*uid://ce32yau7vsmgo"
 MCPRuntime="*uid://c2idvjjf5j2to"
 BeckettRuntime="*uid://dspgi2nxto4e8"
+SaveManager="*uid://cejgnmysdea6w"
 
 [beckett]
 
