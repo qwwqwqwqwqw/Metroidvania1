@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://x6ic7ett7b3v" path="res://玩家/状态/fall.gd" id="5_4a03n"]
 [ext_resource type="Script" uid="uid://bumocmgfkk5yc" path="res://玩家/状态/crouch.gd" id="6_bn6yv"]
 [ext_resource type="Texture2D" uid="uid://c3432h087scdb" path="res://玩家/精灵图/hero.png" id="7_8o6wb"]
+[ext_resource type="Script" uid="uid://c4r6rglt8punc" path="res://玩家/脚本/input_hints.gd" id="8_xk5am"]
+[ext_resource type="Texture2D" uid="uid://sehxjlsnqgnu" path="res://玩家/精灵图/input_icons.png" id="9_umxay"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8o6wb"]
 radius = 8.0
@@ -157,15 +159,18 @@ hframes = 16
 vframes = 4
 
 [node name="CollisionStand" type="CollisionShape2D" parent="." unique_id=1050082777]
+visible = false
 position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_8o6wb")
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="." unique_id=1191321059]
+visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_b2ecg")
 disabled = true
 
 [node name="Label" type="Label" parent="." unique_id=1931238803]
+visible = false
 offset_left = -23.000002
 offset_top = -78.0
 offset_right = 25.673498
@@ -176,6 +181,7 @@ text = "玩家"
 horizontal_alignment = 1
 
 [node name="OneWayPlatFormRaycast" type="RayCast2D" parent="." unique_id=1078847596]
+visible = false
 target_position = Vector2(0, 4)
 collision_mask = 2
 
@@ -184,6 +190,7 @@ libraries/ = SubResource("AnimationLibrary_an3sh")
 autoplay = &"idle"
 
 [node name="OneWayPlatFormShapecast" type="ShapeCast2D" parent="." unique_id=1255978521]
+visible = false
 position = Vector2(0, -3)
 enabled = false
 shape = SubResource("RectangleShape2D_8o6wb")
@@ -199,3 +206,11 @@ position = Vector2(0, -19)
 color = Color(0.97789335, 0.86128134, 0.47608444, 1)
 energy = 0.3
 texture = SubResource("GradientTexture2D_b2ecg")
+
+[node name="InputHints" type="Node2D" parent="." unique_id=1937951882]
+position = Vector2(0, -65)
+script = ExtResource("8_xk5am")
+
+[node name="Sprite2D" type="Sprite2D" parent="InputHints" unique_id=1652805383]
+texture = ExtResource("9_umxay")
+hframes = 16

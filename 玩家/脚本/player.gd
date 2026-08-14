@@ -52,11 +52,12 @@ func _ready() -> void:
 	#初始化状态
 	init_states()
 	self.call_deferred("reparent", get_tree().root)
-	
+	Messages.player_healed.connect(_on_player_healed)
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
-	
+	if event.is_action_pressed("action"):
+		Messages.player_interacted.emit(self)
 	change_state(currentState.handle_input(event))
 	
 	pass
@@ -107,7 +108,6 @@ func init_states()-> void:
 	#设置我们的第一个状态
 	change_state(currentState)
 	currentState.enter()
-	$Label.text=currentState.name
 	
 	pass
 	
@@ -123,7 +123,6 @@ func change_state(new_state: PlayerState)->void:
 	states.push_front(new_state)
 	currentState.enter()
 	states.resize(3)
-	$Label.text=currentState.name
 	pass
 	
 	
@@ -154,4 +153,10 @@ func add_debug_indicator(color: Color=Color.RED)-> void:
 	await  get_tree().create_timer(3.0).timeout
 	d.queue_free() 
 	
+	pass
+
+
+func _on_player_healed(amount: float) -> void:
+	hp +=amount
+	print("玩家血量恢复量：",amount)
 	pass

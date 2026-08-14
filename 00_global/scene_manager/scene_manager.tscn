@@ -22,6 +22,7 @@ script = ExtResource("1_4wb0k")
 visible = false
 modulate = Color(0.16078432, 0.16078432, 0.16078432, 1)
 layout_mode = 3
+anchors_preset = 0
 offset_top = -1.0
 offset_right = 483.0
 offset_bottom = 269.0

@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://dko2e4l5op26g"]
+
+[ext_resource type="Script" uid="uid://c3p8nfo2mtkke" path="res://general/save_point/save_point.gd" id="1_5y7y7"]
+[ext_resource type="Texture2D" uid="uid://dvonys2ndi6f8" path="res://general/save_point/save_point.png" id="1_a0gwv"]
+[ext_resource type="FontFile" uid="uid://d3gbmja51ax64" path="res://general/fonts/alagard.ttf" id="2_f82ql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8soah"]
+size = Vector2(45, 52)
+
+[sub_resource type="Gradient" id="Gradient_uqlpe"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r31eo"]
+gradient = SubResource("Gradient_uqlpe")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Animation" id="Animation_6x2pl"]
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lable:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lable:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-39, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lable:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cd031"]
+resource_name = "game_saved"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lable:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lable:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-40, 12), Vector2(-40, -8), Vector2(-40, 5), Vector2(-40, 5), Vector2(-40, 12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lable:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpylm"]
+_data = {
+&"RESET": SubResource("Animation_6x2pl"),
+&"game_saved": SubResource("Animation_cd031")
+}
+
+[node name="SavePoint" type="Node2D" unique_id=1631448746]
+script = ExtResource("1_5y7y7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1028701320]
+texture = ExtResource("1_a0gwv")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=90725806]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=208268989]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_8soah")
+debug_color = Color(1, 0.18431373, 0.9411765, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1046714301]
+color = Color(1, 0.19748032, 0.7881349, 1)
+energy = 4.48
+texture = SubResource("GradientTexture2D_r31eo")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=494375516]
+position = Vector2(0, -49)
+
+[node name="Lable" type="Label" parent="Node2D" unique_id=769729900]
+visible = false
+offset_left = -39.0
+offset_top = 1.0
+offset_right = 47.0
+offset_bottom = 24.000088
+theme_override_colors/font_color = Color(0.97558653, 0.85951614, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_fonts/font = ExtResource("2_f82ql")
+text = "Game Saved"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D" unique_id=1940809868]
+libraries/ = SubResource("AnimationLibrary_xpylm")
