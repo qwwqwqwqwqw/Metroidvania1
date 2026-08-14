@@ -38,12 +38,13 @@ func transition_scene( new_scene: String, target_area: String, playerOffset: Vec
 	
 	get_tree().change_scene_to_packed( packed_scene )
 	current_scene_uid = ResourceUID.path_to_uid(new_scene)
-	print("新场景uid:",current_scene_uid)
+	if not current_scene_uid in SaveManager.discovered_areas:
+		SaveManager.discovered_areas.append(current_scene_uid)
+		print("新场景uid:",current_scene_uid)
 	scene_entered.emit(current_scene_uid)
 	
 	await get_tree().scene_changed
 	new_scene_ready.emit(target_area, playerOffset )
-	
 	#fade new scene in
 	
 	await fade_screen(Vector2.ZERO, -fade_pos)

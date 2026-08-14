@@ -13,16 +13,16 @@ var persistent_data: Dictionary={} #持久性数据
 
 func _ready() -> void:
 	await get_tree().process_frame
-	load_game()
+	#load_game()
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_F5:
-			save_game()
+			save_game(currrent_slot)
 		elif event.keycode == KEY_F7:
-			load_game()
+			load_game(currrent_slot)
 		elif event.keycode == KEY_1:
 			currrent_slot = 0
 		elif event.keycode == KEY_2:
@@ -33,8 +33,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass
 
 
-func creat_new_game_save() -> void:
+func creat_new_game_save(slot: int) -> void:
+	change_current_slot(slot)
 	var new_game_scene: String = "uid://d1iv3nnkeq0w"
+	discovered_areas.append(new_game_scene)
 	save_data = {
 		"scene_path" : new_game_scene,
 		"x" : 148,
@@ -49,12 +51,13 @@ func creat_new_game_save() -> void:
 		"persistent_data" : persistent_data,
 		}
 	#保存数据
-	var save_file = FileAccess.open(get_file_name(),FileAccess.WRITE)
+	var save_file = FileAccess.open(get_file_name(slot),FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
 	print("存档成功")
 	pass
 
-func save_game() -> void:
+func save_game(slot: int) -> void:
+	change_current_slot(slot)
 	var player: Player = get_tree().get_first_node_in_group("Player")
 	save_data = {
 		"scene_path" : SceneManager.current_scene_uid,
@@ -69,18 +72,18 @@ func save_game() -> void:
 		"discovered_areas" : discovered_areas,
 		"persistent_data" : persistent_data,
 		}
-	var save_file = FileAccess.open(get_file_name(),FileAccess.WRITE)
+	var save_file = FileAccess.open(get_file_name(slot),FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
 	print("保存存档成功")
 	pass
 
 
 
-func load_game() -> void:
-	
-	if not FileAccess.file_exists(get_file_name()):
+func load_game(slot: int) -> void:
+	change_current_slot(slot)
+	if not FileAccess.file_exists(get_file_name(slot)):
 		return
-	var save_file = FileAccess.open(get_file_name(), FileAccess.READ)
+	var save_file = FileAccess.open(get_file_name(slot), FileAccess.READ)
 	save_data = JSON.parse_string( save_file.get_line() )
 	
 	persistent_data = save_data.get( "persistent_data", {} )
@@ -115,5 +118,13 @@ func setup_player() -> void:
 	pass
 
 
-func get_file_name() -> String:
-	return "user://" + SLOTS[currrent_slot] + ".sav"
+func get_file_name(slot: int) -> String:
+	return "user://" + SLOTS[slot] + ".sav"
+
+
+func save_file_exists(slot: int) -> bool:
+	return FileAccess.file_exists(get_file_name(slot))
+	
+func change_current_slot(slot: int) -> void:
+	currrent_slot = slot
+	pass

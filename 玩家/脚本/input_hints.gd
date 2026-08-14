@@ -37,8 +37,6 @@ func _input(event: InputEvent) -> void:
 		controller_type = "keyboard"
 	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		get_controller_type(event.device)
-	
-	print("控制器类型",controller_type)
 	pass
 
 

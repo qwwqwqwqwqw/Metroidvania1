@@ -24,11 +24,11 @@ func _on_player_exited(_n: Node2D) -> void:
 	pass
 
 
-func _on_player_interacted(player: Player) -> void:
+func _on_player_interacted(_player: Player) -> void:
 	print("玩家交互了")
 	#保存游戏
-	var scene_path = owner.scene_file_path
-	SaveManager.save_game()
+	var _scene_path = owner.scene_file_path
+	SaveManager.save_game(SaveManager.currrent_slot)
 	#治愈玩家
 	Messages.player_healed.emit(999)
 	#播放动画
