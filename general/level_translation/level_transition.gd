@@ -1,6 +1,6 @@
 @tool
 @icon("res://general/ions/level_transition.svg")
-class_name LevelTranslation extends Node2D
+class_name LevelTransition extends Node2D
 
 enum SIDE {LEFT, RIGHT, TOP, BOTTOM}
 

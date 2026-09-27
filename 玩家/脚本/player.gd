@@ -28,8 +28,14 @@ var previousState: PlayerState:
 #代码区域结束
 
 #玩家统计信息
-var hp: float = 20.0
-var max_hp: float = 20.0
+var hp: float = 20.0:
+	set(value):
+		hp = clampf(value, 0, max_hp)
+		Messages.player_healed_changed.emit(hp,max_hp)
+var max_hp: float = 20.0:
+	set(value):
+		max_hp = value
+		Messages.player_healed_changed.emit(hp,max_hp)
 var dash: bool = false
 var double_jump: bool = false
 var ground_slam: bool = false
@@ -58,6 +64,27 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("action"):
 		Messages.player_interacted.emit(self)
+	elif event.is_action_pressed("pause"):
+		get_tree().paused = true
+		var pause_menu: PauseMenu = load("res://pause_menu/PauseMenu.tscn").instantiate()
+		add_child(pause_menu)
+		return
+		
+	#测试代码    
+	if event is InputEventKey:
+		if event.keycode == KEY_MINUS:
+			if Input.is_key_pressed(KEY_SHIFT):
+				max_hp-=10
+			else:
+				hp-= 2
+		elif event.keycode == KEY_EQUAL:
+			if Input.is_key_pressed(KEY_SHIFT):
+				max_hp+=10
+			else:
+				hp+= 2
+			
+	
+	
 	change_state(currentState.handle_input(event))
 	
 	pass

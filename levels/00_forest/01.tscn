@@ -71,6 +71,7 @@ turbulence_enabled = true
 turbulence_influence_max = 0.19000001
 
 [node name="01" type="Node2D" unique_id=1930534068]
+position = Vector2(0, 84)
 
 [node name="LevelBounds" type="Node2D" parent="." unique_id=938200527]
 z_index = 256
@@ -283,8 +284,8 @@ texture = ExtResource("6_chwhs")
 offset = Vector2(0, 256)
 
 [node name="LevelTransition" parent="." unique_id=2128836170 instance=ExtResource("4_vhcel")]
-position = Vector2(4415, 193)
-size = 15
+position = Vector2(4416, 190)
+size = 14
 location = 1
 target_level = "uid://cm7nq6gb0ev1i"
 
@@ -507,4 +508,4 @@ visibility_rect = Rect2(-1750, -200, 3500, 400)
 process_material = SubResource("ParticleProcessMaterial_b436d")
 
 [node name="PlayerSpawn" parent="." unique_id=449131735 instance=ExtResource("7_vdj2u")]
-position = Vector2(148, 226)
+position = Vector2(148, 206)

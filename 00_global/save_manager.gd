@@ -40,7 +40,7 @@ func creat_new_game_save(slot: int) -> void:
 	save_data = {
 		"scene_path" : new_game_scene,
 		"x" : 148,
-		"y" : 226,
+		"y" : 250,
 		"hp" : 20,
 		"max_hp" : 20,
 		"double_jump" : false,
@@ -128,3 +128,8 @@ func save_file_exists(slot: int) -> bool:
 func change_current_slot(slot: int) -> void:
 	currrent_slot = slot
 	pass
+
+
+func is_area_discovered(scene_uid: String) -> bool:
+	
+	return discovered_areas.has(scene_uid)

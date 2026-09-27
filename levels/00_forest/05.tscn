@@ -45,9 +45,11 @@ metadata/_custom_type_script = "uid://dtu1soyslahj5"
 
 [node name="Torch" parent="Props" unique_id=1851023920 instance=ExtResource("5_6o5dd")]
 position = Vector2(320, 195)
+frame_progress = 0.93212515
 
 [node name="Torch2" parent="Props" unique_id=910615249 instance=ExtResource("5_6o5dd")]
 position = Vector2(107, 195)
+frame_progress = 0.3523903
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=787180818]
 energy = 0.7
