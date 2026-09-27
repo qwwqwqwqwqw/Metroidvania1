@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vrik"]
 size = Vector2(32, 32)
 
-[node name="LevelTranslation" type="Node2D" unique_id=2128836170]
+[node name="LevelTransition" type="Node2D" unique_id=2128836170]
 script = ExtResource("1_rn46u")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=837948176]

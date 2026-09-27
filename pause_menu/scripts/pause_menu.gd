@@ -58,5 +58,6 @@ func _on_back_to_title_pressed() -> void:
 	#释放玩家
 	SceneManager.transition_scene("res://title_scream/title_scream.tscn","",Vector2.ZERO,"up")
 	get_tree().paused = false
+	Messages.back_to_title_screen.emit()
 	queue_free()
 	pass

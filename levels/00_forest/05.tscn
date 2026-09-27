@@ -35,6 +35,7 @@ target_area_name = "LevelTransition3"
 position = Vector2(388, 192)
 size = 3
 location = 1
+target_level = "uid://cblwcalbpdc64"
 
 [node name="LevelBounds" type="Node2D" parent="." unique_id=83072049]
 z_index = 256

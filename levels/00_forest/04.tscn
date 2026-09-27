@@ -47,7 +47,7 @@ position = Vector2(1182, 196)
 z_index = 256
 position = Vector2(0, -95)
 script = ExtResource("2_c3nrs")
-width = 1568
+width = 1536
 height = 366
 metadata/_custom_type_script = "uid://dtu1soyslahj5"
 
@@ -56,6 +56,12 @@ position = Vector2(193, -96)
 size = 3
 location = 2
 target_level = "uid://dc2m2cv5i7d8d"
+
+[node name="LevelTransition2" parent="." unique_id=1777122689 instance=ExtResource("3_c3nrs")]
+position = Vector2(1536, 192)
+size = 6
+location = 1
+target_level = "uid://be7f2ea3srl5f"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1071807488]
 energy = 0.8
