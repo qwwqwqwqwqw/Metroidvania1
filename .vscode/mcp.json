@@ -2,7 +2,7 @@
   "servers": {
     "beckett": {
       "type": "http",
-      "url": "http://127.0.0.1:8772/mcp/e8ee498c1fe9c5608b4ad515aab3b67c"
+      "url": "http://127.0.0.1:8770/mcp/e8ee498c1fe9c5608b4ad515aab3b67c"
     }
   }
 }

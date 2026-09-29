@@ -48,6 +48,7 @@ position = Vector2(14, 36)
 
 [node name="Torch2" parent="Props" unique_id=1676123968 instance=ExtResource("4_sqn82")]
 position = Vector2(361, 229)
+frame_progress = 0.09962627
 
 [node name="Torch3" parent="Props" unique_id=541515364 instance=ExtResource("4_sqn82")]
 position = Vector2(445, -92)
