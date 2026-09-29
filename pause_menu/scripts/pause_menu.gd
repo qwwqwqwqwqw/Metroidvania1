@@ -20,6 +20,7 @@ func _ready() -> void:
 	#暂停玩家
 	show_pause_screen()
 	system_menu_button.pressed.connect(show_system_menu)
+	Audio.setup_button_audio(self)
 	#显示地图
 	set_systems_menu()
 	pass

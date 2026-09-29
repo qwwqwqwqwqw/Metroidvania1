@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cn7na0cq1gofs" path="res://levels/props/Torch.tscn" id="2_140sb"]
 [ext_resource type="FontFile" uid="uid://d3gbmja51ax64" path="res://general/fonts/alagard.ttf" id="3_140sb"]
 [ext_resource type="Texture2D" uid="uid://bkfpykv60wwtd" path="res://title_scream/sprite/metroidvania_logo.png" id="4_htgry"]
+[ext_resource type="Script" uid="uid://dujh0w1pj87c8" path="res://music/music_auto_trigger.gd" id="6_ebkac"]
+[ext_resource type="AudioStream" uid="uid://dqblof6xqaogh" path="res://music/title_01.ogg" id="7_hcihx"]
 
 [sub_resource type="Animation" id="Animation_ebkac"]
 length = 0.001
@@ -123,7 +125,6 @@ position = Vector2(107, 195)
 
 [node name="MainMenu" type="VBoxContainer" parent="Control" unique_id=1577448146]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 157.0
 offset_top = 37.0
@@ -161,6 +162,7 @@ text = "Load Game"
 
 [node name="NewGameMenu" type="VBoxContainer" parent="Control" unique_id=1671548605]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,3 +247,8 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_140sb")
 text = "Load Slot 03"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1081148707]
+script = ExtResource("6_ebkac")
+track = ExtResource("7_hcihx")
+metadata/_custom_type_script = "uid://dujh0w1pj87c8"

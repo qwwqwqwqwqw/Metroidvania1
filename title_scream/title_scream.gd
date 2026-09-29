@@ -32,6 +32,7 @@ func _ready() -> void:
 	load_slot_02.pressed.connect(_on_load_game_pressed.bind(1))
 	load_slot_03.pressed.connect(_on_load_game_pressed.bind(2))
 	#加入按钮音频
+	Audio.setup_button_audio(self)
 	#展示主菜单
 	show_main_menu()
 	#设置LOGO动画转换

@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bttryqjhpm6m4" path="res://general/level_translation/level_transition.tscn" id="3_ocngb"]
 [ext_resource type="PackedScene" uid="uid://cn7na0cq1gofs" path="res://levels/props/Torch.tscn" id="5_6o5dd"]
 [ext_resource type="PackedScene" uid="uid://dko2e4l5op26g" path="res://general/save_point/save_point.tscn" id="6_u6uvq"]
+[ext_resource type="Script" uid="uid://dujh0w1pj87c8" path="res://music/music_auto_trigger.gd" id="7_6o5dd"]
+[ext_resource type="AudioStream" uid="uid://yp1iojur1oah" path="res://music/dungeon_01.ogg" id="8_wma0d"]
 
 [node name="05" type="Node2D" unique_id=1377555478]
 
@@ -58,3 +60,8 @@ blend_mode = 1
 
 [node name="SavePoint" parent="." unique_id=1631448746 instance=ExtResource("6_u6uvq")]
 position = Vector2(214, 171)
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=244835233]
+script = ExtResource("7_6o5dd")
+track = ExtResource("8_wma0d")
+metadata/_custom_type_script = "uid://dujh0w1pj87c8"
