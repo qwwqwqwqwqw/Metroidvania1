@@ -219,7 +219,6 @@ size = Vector2(22, 102.625)
 [node name="Door" type="Node2D" unique_id=477952598]
 process_mode = 3
 script = ExtResource("1_ko3ad")
-unique_name = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=963601558]
 position = Vector2(0, 15)

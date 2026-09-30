@@ -26,6 +26,7 @@ func _ready() -> void:
 pass
 
 func _on_switch_activated(is_open: bool) -> void:
+	Audio.play_spatial_sound(DOOR_CRASH_AUDIO,global_position)
 	SaveManager.persistent_data[unique_name] = "open" if is_open else "closed"
 	_play_transition(is_open)
 

@@ -64,4 +64,5 @@ position = Vector2(214, 171)
 [node name="MusicAutoTrigger" type="Node" parent="." unique_id=244835233]
 script = ExtResource("7_6o5dd")
 track = ExtResource("8_wma0d")
+reverb = 1
 metadata/_custom_type_script = "uid://dujh0w1pj87c8"

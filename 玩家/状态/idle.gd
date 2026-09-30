@@ -3,19 +3,19 @@ class_name PlayerstateIdle  extends PlayerState
 @export var idle_deceleration_rate: float=5.0
 
 func init() -> void:
-	print("init!idle")
+	#print("init!idle")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!idle")
+	#print("enter!idle")
 	player.animation_player.play("idle")
 	player.jumpTimes = 2
 	pass
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!idle")
+	#print("exit!idle")
 	pass
 
 

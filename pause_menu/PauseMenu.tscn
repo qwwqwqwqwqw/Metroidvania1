@@ -103,6 +103,7 @@ horizontal_alignment = 2
 
 [node name="PauseScreen" type="Control" parent="Control" unique_id=1913615898]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchor_left = 0.025
 anchor_right = 0.025
@@ -286,7 +287,6 @@ text = "System"
 
 [node name="System" type="Control" parent="Control" unique_id=1481240495]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchor_left = 0.025
 anchor_right = 0.025

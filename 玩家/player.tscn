@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://x6ic7ett7b3v" path="res://玩家/状态/fall.gd" id="5_4a03n"]
 [ext_resource type="Script" uid="uid://bumocmgfkk5yc" path="res://玩家/状态/crouch.gd" id="6_bn6yv"]
 [ext_resource type="Texture2D" uid="uid://c3432h087scdb" path="res://玩家/精灵图/hero.png" id="7_8o6wb"]
+[ext_resource type="Script" uid="uid://bd2n6u67lvfem" path="res://玩家/脚本/player_camera.gd" id="8_umxay"]
 [ext_resource type="Script" uid="uid://c4r6rglt8punc" path="res://玩家/脚本/input_hints.gd" id="8_xk5am"]
 [ext_resource type="Texture2D" uid="uid://sehxjlsnqgnu" path="res://玩家/精灵图/input_icons.png" id="9_umxay"]
 
@@ -200,6 +201,7 @@ collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1720383693]
 position = Vector2(0, -40)
+script = ExtResource("8_umxay")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=838868375]
 position = Vector2(0, -19)

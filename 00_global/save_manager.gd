@@ -1,6 +1,7 @@
 #保存管理器脚本
 extends Node
 
+const CONFIG_FILE_PATH = "user://setting.cfg"
 const SLOTS: Array[String] = [
 	"save_01","save_02","save_03"
 ]
@@ -13,22 +14,23 @@ var persistent_data: Dictionary={} #持久性数据
 
 func _ready() -> void:
 	await get_tree().process_frame
+	load_onfiguration()
 	#load_game()
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_F5:
-			save_game(currrent_slot)
-		elif event.keycode == KEY_F7:
-			load_game(currrent_slot)
-		elif event.keycode == KEY_1:
-			currrent_slot = 0
-		elif event.keycode == KEY_2:
-			currrent_slot = 1
-		elif event.keycode == KEY_3:
-			currrent_slot = 2
+	if OS.is_debug_build():
+		if event is InputEventKey and event.is_pressed():
+			if event.keycode == KEY_F5:
+				save_game(currrent_slot)
+			elif event.keycode == KEY_F7:
+				load_game(currrent_slot)
+			elif event.keycode == KEY_1:
+				currrent_slot = 0
+			elif event.keycode == KEY_2:
+				currrent_slot = 1
+			elif event.keycode == KEY_3:
+				currrent_slot = 2
 	
 	pass
 
@@ -133,3 +135,27 @@ func change_current_slot(slot: int) -> void:
 func is_area_discovered(scene_uid: String) -> bool:
 	
 	return discovered_areas.has(scene_uid)
+
+#保存并加载配置
+func save_configuration() -> void:
+	var config :=ConfigFile.new()
+	config.set_value("audio", "music", AudioServer.get_bus_volume_linear(2))
+	config.set_value("audio", "sfx", AudioServer.get_bus_volume_linear(3))
+	config.set_value("audio", "ui", AudioServer.get_bus_volume_linear(4))
+	config.save(CONFIG_FILE_PATH)
+	pass
+
+func load_onfiguration() -> void:
+	var config :=ConfigFile.new()
+	var err = config.load(CONFIG_FILE_PATH)
+	if err != OK:
+		AudioServer.set_bus_volume_linear(2, 1.0)
+		AudioServer.set_bus_volume_linear(3, 1.0)
+		AudioServer.set_bus_volume_linear(4, 1.0)
+		save_configuration()
+		return
+	
+	AudioServer.set_bus_volume_linear(2, config.get_value("audio","music",0.5))
+	AudioServer.set_bus_volume_linear(3, config.get_value("audio","sfx",1))
+	AudioServer.set_bus_volume_linear(4, config.get_value("audio","ui",1))
+	pass

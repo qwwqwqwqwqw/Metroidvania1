@@ -2,19 +2,19 @@ class_name PlayerstateRun  extends PlayerState
 
 
 func init() -> void:
-	print("init!run")
+	#print("init!run")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!run")
+	#print("enter!run")
 	player.animation_player.play("run")
 	player.jumpTimes = 2
 	pass
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!run")
+	#print("exit!run")
 	pass
 
 

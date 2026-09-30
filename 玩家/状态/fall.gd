@@ -3,19 +3,19 @@ class_name PlayerstateFall  extends PlayerState
 
  
 func init() -> void:
-	print("init!fall")
+	#print("init!fall")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!fall")
+	#print("enter!fall")
 	player.animation_player.play("jump")
 	player.animation_player.pause()
 	pass
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!fall")
+	#print("exit!fall")
 	pass
 
 
@@ -41,6 +41,8 @@ func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
 	if player.is_on_floor():
 		#player.add_debug_indicator(Color.RED)
+		VisualEffects.land_dust(player.global_position)
+		VisualEffects.camera_shake()
 		return idle
 	player.velocity.x = player.direction.x * player.move_speed
 	return null

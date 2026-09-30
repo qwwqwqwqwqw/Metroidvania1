@@ -27,6 +27,7 @@ func _on_player_entered(_n: Node2D) -> void:
 
 
 func _on_player_interacted(_player: Node2D) -> void:
+	Audio.play_spatial_sound(DOOR_SWITCH_AUDIO,global_position)
 	set_open(!is_open)
 	activated.emit(is_open)
 

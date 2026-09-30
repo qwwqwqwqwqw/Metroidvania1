@@ -3,13 +3,14 @@ class_name PlayerstateJump  extends PlayerState
 
 
 func init() -> void:
-	print("init!jump")
+	#print("init!jump")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!jump")
+	#print("enter!jump")
 	player.animation_player.play("jump")
+	VisualEffects.jump_dust(player.global_position)
 	player.animation_player.pause()
 	#player.add_debug_indicator(Color.AQUAMARINE)
 	player.jumpTimes-=1
@@ -18,7 +19,7 @@ func enter()-> void:
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!jump")
+	#print("exit!jump")
 	#player.add_debug_indicator(Color.LAWN_GREEN)
 	pass
 

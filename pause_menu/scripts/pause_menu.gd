@@ -12,7 +12,7 @@ class_name PauseMenu extends CanvasLayer
 
 #endregion
 
-
+var player_position: Vector2
 
 var player: Player
 
@@ -23,6 +23,9 @@ func _ready() -> void:
 	Audio.setup_button_audio(self)
 	#显示地图
 	set_systems_menu()
+	var player: Node2D = get_tree().get_first_node_in_group("Player")
+	if player:
+		player_position = player.global_position
 	pass
 
 
@@ -50,6 +53,14 @@ func show_system_menu() -> void:
 
 
 func set_systems_menu() -> void:
+	music_slider.value = AudioServer.get_bus_volume_linear(2)
+	sfx_slider.value = AudioServer.get_bus_volume_linear(3)
+	ui_slider.value = AudioServer.get_bus_volume_linear(4)
+	
+	music_slider.value_changed.connect(_on_music_slider_value_changed)
+	sfx_slider.value_changed.connect(_on_sfx_slider_value_changed)
+	ui_slider.value_changed.connect(_on_ui_slider_value_changed)
+	
 	back_to_tile.pressed.connect(_on_back_to_title_pressed)
 	back_to_map.pressed.connect(show_pause_screen)
 	pass
@@ -61,4 +72,26 @@ func _on_back_to_title_pressed() -> void:
 	get_tree().paused = false
 	Messages.back_to_title_screen.emit()
 	queue_free()
+	pass
+
+
+func _on_music_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(2, value)
+	Audio.ui_focus_play()
+	#保存设置
+	SaveManager.save_configuration()
+	pass
+
+func _on_sfx_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(3, value)
+	Audio.ui_focus_play()
+	#保存设置
+	SaveManager.save_configuration()
+	pass
+
+func _on_ui_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(4, value)
+	Audio.ui_focus_play()
+	#保存设置
+	SaveManager.save_configuration()
 	pass

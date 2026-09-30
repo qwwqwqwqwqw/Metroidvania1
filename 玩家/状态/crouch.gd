@@ -3,12 +3,12 @@ class_name PlayerstateCrouch extends PlayerState
 @export var deceleration_rate: float = 10
 
 func init() -> void:
-	print("init!crouch")
+	#print("init!crouch")
 	pass
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	print("enter!crouch")
+	#print("enter!crouch")
 	player.animation_player.play("crouch")
 	player.collision_stand.disabled=true
 	player.collision_crouch.disabled=false
@@ -17,7 +17,7 @@ func enter()-> void:
 	
 #当退出状态时会发生什么	
 func exit()-> void:
-	print("exit!crouch")
+	#print("exit!crouch")
 	player.collision_stand.disabled=false
 	player.collision_crouch.disabled=true
 
