@@ -10,6 +10,8 @@ var nextState: PlayerState
 @onready var jump:PlayerstateJump=%jump
 @onready var fall:PlayerstateFall=%fall
 @onready var crouch: PlayerstateCrouch = %crouch
+@onready var attack: PlayerStateAttack = %attack
+
 
 #代码区域
 
@@ -34,15 +36,15 @@ func handle_input(_envent: InputEvent)-> PlayerState:
 	
 	
 	
-	return null
+	return nextState
 	
 
 #状态过程中发生的事
 func process(_delta: float)-> PlayerState:
 	#print("process:",name,_delta)
-	return null
+	return nextState
 	
 #每次物理过程更新时会发生的事情	
 func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
-	return null
+	return nextState

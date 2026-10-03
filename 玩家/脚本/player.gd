@@ -9,6 +9,9 @@ const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var one_way_plat_form_shapecast: ShapeCast2D = $OneWayPlatFormShapecast
+@onready var attack_area: AttackArea = $AttackArea
+@onready var attack_sprite_2d: Sprite2D = %AttackSprite2D
+
 #代码区域结束
 
 
@@ -19,6 +22,8 @@ var jumpTimes:int = 2
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
 @export var max_fall_speed: float=600.0
+
+
 #代码区域：状态机所需要的值
 var states: Array[PlayerState]
 var currentState: PlayerState:
@@ -157,17 +162,22 @@ func change_state(new_state: PlayerState)->void:
 	
 func update_direction()->void:
 	
-	var pre_direction:Vector2 =direction
+	var pre_direction:Vector2 = direction
 	
 	var x_axis=Input.get_axis("left","right")
 	var y_axis=Input.get_axis("up","down")
 	direction=Vector2(x_axis,y_axis)
 	
 	if pre_direction != direction:
+		attack_area.flip(direction.x)
 		if direction.x < 0:
 			sprite_2d.flip_h = true
+			attack_sprite_2d.flip_h = true
+			attack_sprite_2d.position.x = -24
 		elif direction.x > 0:
 			sprite_2d.flip_h = false
+			attack_sprite_2d.flip_h = false
+			attack_sprite_2d.position.x = 24
 	
 	pass
 	
@@ -186,6 +196,6 @@ func add_debug_indicator(color: Color=Color.RED)-> void:
 
 
 func _on_player_healed(amount: float) -> void:
-	hp +=amount
+	hp += amount
 	print("玩家血量恢复量：",amount)
 	pass
