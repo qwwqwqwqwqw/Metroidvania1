@@ -19,7 +19,6 @@ func init() -> void:
 	
 #当进入状态是会发生什么	
 func enter()-> void:
-	
 	do_attack()
 	player.animation_player.animation_finished.connect(_on_animation_finished)
 	pass

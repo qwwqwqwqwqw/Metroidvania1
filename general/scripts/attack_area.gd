@@ -20,6 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var pos: Vector2 = global_position
 		pos.x = clampf(global_position.x + scale.x * collision_shape_2d.shape.size.x, body.global_position.x - body.collision_shape_2d_2.shape.size.x/2, body.global_position.x + body.collision_shape_2d_2.shape.size.x/2)
 		VisualEffects.hit_dust(pos)
+		
 		pass
 	
 	pass

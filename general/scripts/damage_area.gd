@@ -3,7 +3,7 @@ class_name DamageArea extends Area2D
 
 @export var particle_settings: HitParticleSettings
 signal  damage_taken(attack_area)
-@onready var collision_shape_2d_2: CollisionShape2D = $CollisionShape2D2
+@onready var collision_shape_2d_2: CollisionShape2D = $CollisionShape2D
 
 @export var audio: AudioStream
 

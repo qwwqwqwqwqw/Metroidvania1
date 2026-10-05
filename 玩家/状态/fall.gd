@@ -46,7 +46,6 @@ func physics_process(_delta: float)-> PlayerState:
 		#player.add_debug_indicator(Color.RED)
 		VisualEffects.land_dust(player.global_position)
 		VisualEffects.camera_shake()
-		VisualEffects.hit_particles(player.global_position, player.direction, particle_settings)
 		return idle
 	player.velocity.x = player.direction.x * player.move_speed
 	return null

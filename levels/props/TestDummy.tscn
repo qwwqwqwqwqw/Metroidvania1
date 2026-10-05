@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://daix5772i46sw"]
+
+[ext_resource type="Script" uid="uid://rapry5hxa3tw" path="res://levels/props/test_dummy.gd" id="1_0j053"]
+[ext_resource type="Script" uid="uid://crnwerxqnk85i" path="res://00_global/visual_effects/hit_particle_settings.gd" id="2_03x4e"]
+[ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="2_msfao"]
+[ext_resource type="Texture2D" uid="uid://bao2u7dep80tv" path="res://general/sprites/props_destructible.png" id="3_0gaoy"]
+[ext_resource type="Resource" uid="uid://d37xkly2ai15m" path="res://00_global/visual_effects/hit_particle_settiings/hit_wood_small.tres" id="3_03x4e"]
+[ext_resource type="AudioStream" uid="uid://sx6kqnfn4vlx" path="res://general/audio/hit.wav" id="3_msfao"]
+[ext_resource type="Resource" uid="uid://wmv54yr1umwb" path="res://00_global/visual_effects/hit_particle_settiings/hit_wood_medium.tres" id="4_gvf80"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03x4e"]
+size = Vector2(16, 31)
+
+[node name="TestDummy" type="Node2D" unique_id=1975961126]
+script = ExtResource("1_0j053")
+particles = Array[ExtResource("2_03x4e")]([ExtResource("3_03x4e"), ExtResource("4_gvf80")])
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=367941947]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("2_msfao")
+particle_settings = ExtResource("3_03x4e")
+audio = ExtResource("3_msfao")
+metadata/_custom_type_script = "uid://dtk71i48oihoh"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea" unique_id=698940166]
+visible = false
+position = Vector2(0, -32.5)
+shape = SubResource("RectangleShape2D_03x4e")
+debug_color = Color(0, 0.62212, 0.7234701, 0)
+
+[node name="BodySprite2D" type="Sprite2D" parent="." unique_id=647285234]
+position = Vector2(0, -10)
+texture = ExtResource("3_0gaoy")
+offset = Vector2(0, -19)
+region_enabled = true
+region_rect = Rect2(17, 10, 14, 38.01654)
+
+[node name="BaseSprite2D" type="Sprite2D" parent="." unique_id=1747225201]
+position = Vector2(0, -6)
+texture = ExtResource("3_0gaoy")
+region_enabled = true
+region_rect = Rect2(14.494625, 50.800713, 19.008358, 12.755817)
