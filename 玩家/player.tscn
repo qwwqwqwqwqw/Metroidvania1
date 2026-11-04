@@ -11,9 +11,11 @@
 [ext_resource type="Script" uid="uid://cxbq7qq1emu1r" path="res://玩家/状态/attack.gd" id="8_d8244"]
 [ext_resource type="Script" uid="uid://bd2n6u67lvfem" path="res://玩家/脚本/player_camera.gd" id="8_umxay"]
 [ext_resource type="Script" uid="uid://c4r6rglt8punc" path="res://玩家/脚本/input_hints.gd" id="8_xk5am"]
+[ext_resource type="Script" uid="uid://cng2pnovkx5m4" path="res://玩家/状态/take_damage.gd" id="9_pig3d"]
 [ext_resource type="Texture2D" uid="uid://sehxjlsnqgnu" path="res://玩家/精灵图/input_icons.png" id="9_umxay"]
 [ext_resource type="Texture2D" uid="uid://wi1l2spux25i" path="res://玩家/精灵图/weapon_smears.png" id="10_mnw4i"]
 [ext_resource type="Script" uid="uid://0rmcps26bvpw" path="res://general/scripts/attack_area.gd" id="12_an3sh"]
+[ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="16_ioqyp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8o6wb"]
 radius = 8.0
@@ -309,6 +311,10 @@ script = ExtResource("6_bn6yv")
 unique_name_in_owner = true
 script = ExtResource("8_d8244")
 
+[node name="TakeDamage" type="Node" parent="States" unique_id=615454517]
+unique_name_in_owner = true
+script = ExtResource("9_pig3d")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602917418]
 position = Vector2(0, -39)
 texture = ExtResource("7_8o6wb")
@@ -391,3 +397,23 @@ metadata/_custom_type_script = "uid://0rmcps26bvpw"
 position = Vector2(33, 0)
 shape = SubResource("RectangleShape2D_kpy4q")
 debug_color = Color(1, 0.09118253, 0.0045692325, 0.41960785)
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1253928886]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("16_ioqyp")
+metadata/_custom_type_script = "uid://dtk71i48oihoh"
+
+[node name="DAStand" type="CollisionShape2D" parent="DamageArea" unique_id=2100974138]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -24)
+shape = SubResource("CapsuleShape2D_8o6wb")
+
+[node name="DACrouch" type="CollisionShape2D" parent="DamageArea" unique_id=826460784]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_b2ecg")
+disabled = true

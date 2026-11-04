@@ -23,7 +23,8 @@ particle_settings = ExtResource("3_03x4e")
 audio = ExtResource("3_msfao")
 metadata/_custom_type_script = "uid://dtk71i48oihoh"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea" unique_id=698940166]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=698940166]
+unique_name_in_owner = true
 visible = false
 position = Vector2(0, -32.5)
 shape = SubResource("RectangleShape2D_03x4e")

@@ -3,9 +3,17 @@ class_name DamageArea extends Area2D
 
 @export var particle_settings: HitParticleSettings
 signal  damage_taken(attack_area)
-@onready var collision_shape_2d_2: CollisionShape2D = $CollisionShape2D
+@onready var collision_shape_2d_2: CollisionShape2D = _find_collision_shape()
 
 @export var audio: AudioStream
+
+
+func _find_collision_shape() -> CollisionShape2D:
+	# 不同道具场景的碰撞节点命名不统一，这里按类型查找，避免依赖具体节点名。
+	for child in get_children():
+		if child is CollisionShape2D:
+			return child
+	return null
 
 func take_damage(attack_area: AttackArea) -> void:
 	damage_taken.emit(attack_area)

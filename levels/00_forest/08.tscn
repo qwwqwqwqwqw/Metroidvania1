@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dutgy5rm1ndir" path="res://general/scripts/breakable.gd" id="4_40tmj"]
 [ext_resource type="Script" uid="uid://dtu1soyslahj5" path="res://general/scripts/level_bounds.gd" id="4_ljo3v"]
 [ext_resource type="PackedScene" uid="uid://c04rscoccbnwc" path="res://levels/props/Create.tscn" id="4_lybmi"]
+[ext_resource type="PackedScene" uid="uid://bi6o0nswg5585" path="res://levels/props/SpikeDummy.tscn" id="5_8blvm"]
 [ext_resource type="Script" uid="uid://crnwerxqnk85i" path="res://00_global/visual_effects/hit_particle_settings.gd" id="5_dalde"]
 [ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="6_ak5gn"]
 [ext_resource type="Resource" uid="uid://brygep1mm1tsa" path="res://00_global/visual_effects/hit_particle_settiings/hit_wood_large.tres" id="8_ilyst"]
@@ -51,6 +52,9 @@ position = Vector2(155, 196)
 [node name="Breakable" parent="Props" unique_id=2062310182 instance=ExtResource("4_lybmi")]
 position = Vector2(89, 178)
 
+[node name="SpikeDummy" parent="Props" unique_id=1780907517 instance=ExtResource("5_8blvm")]
+position = Vector2(413, 198)
+
 [node name="PlayerSpawn" parent="." unique_id=449131735 instance=ExtResource("3_6hjtw")]
 position = Vector2(362, 165)
 
@@ -84,5 +88,6 @@ script = ExtResource("6_ak5gn")
 metadata/_custom_type_script = "uid://dtk71i48oihoh"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Breakable/DamageArea" unique_id=1893124826]
+unique_name_in_owner = true
 position = Vector2(0, -41.59205)
 shape = SubResource("RectangleShape2D_dalde")

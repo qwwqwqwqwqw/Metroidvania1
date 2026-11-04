@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bi6o0nswg5585"]
+
+[ext_resource type="Script" uid="uid://rapry5hxa3tw" path="res://levels/props/test_dummy.gd" id="1_t83e3"]
+[ext_resource type="Script" uid="uid://crnwerxqnk85i" path="res://00_global/visual_effects/hit_particle_settings.gd" id="2_mcpby"]
+[ext_resource type="Resource" uid="uid://d37xkly2ai15m" path="res://00_global/visual_effects/hit_particle_settiings/hit_wood_small.tres" id="3_hqtg4"]
+[ext_resource type="Resource" uid="uid://wmv54yr1umwb" path="res://00_global/visual_effects/hit_particle_settiings/hit_wood_medium.tres" id="4_xnd1s"]
+[ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="5_cusp3"]
+[ext_resource type="AudioStream" uid="uid://sx6kqnfn4vlx" path="res://general/audio/hit.wav" id="6_oc53r"]
+[ext_resource type="Texture2D" uid="uid://bao2u7dep80tv" path="res://general/sprites/props_destructible.png" id="7_isr3r"]
+[ext_resource type="Script" uid="uid://bames133o3ktl" path="res://general/scripts/hazard_area.gd" id="8_mcpby"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03x4e"]
+size = Vector2(14, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtg4"]
+size = Vector2(14, 18.5)
+
+[node name="SpikeDummy" type="Node2D" unique_id=1975961126]
+script = ExtResource("1_t83e3")
+particles = Array[ExtResource("2_mcpby")]([ExtResource("3_hqtg4"), ExtResource("4_xnd1s")])
+base_wobble_angle = 9.0
+wobble_speed = 0.25
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=367941947]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("5_cusp3")
+particle_settings = ExtResource("3_hqtg4")
+audio = ExtResource("6_oc53r")
+metadata/_custom_type_script = "uid://dtk71i48oihoh"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=698940166]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_03x4e")
+debug_color = Color(0, 0.62212, 0.7234701, 0)
+
+[node name="BodySprite2D" type="Sprite2D" parent="." unique_id=647285234]
+position = Vector2(0, -6)
+texture = ExtResource("7_isr3r")
+offset = Vector2(0, -19)
+region_enabled = true
+region_rect = Rect2(33, 17, 14, 31)
+
+[node name="HazardArea" type="Area2D" parent="BodySprite2D" unique_id=1191197018]
+position = Vector2(0, 6)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_mcpby")
+metadata/_custom_type_script = "uid://bames133o3ktl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodySprite2D/HazardArea" unique_id=1111673053]
+position = Vector2(0, -31.25)
+shape = SubResource("RectangleShape2D_hqtg4")
+debug_color = Color(1, 0.010913014, 0, 0)
+
+[node name="BaseSprite2D" type="Sprite2D" parent="." unique_id=1747225201]
+position = Vector2(0, -6)
+texture = ExtResource("7_isr3r")
+region_enabled = true
+region_rect = Rect2(14.494625, 50.800713, 19.008358, 12.755817)

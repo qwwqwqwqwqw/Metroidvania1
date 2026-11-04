@@ -3,14 +3,22 @@ class_name  Player extends CharacterBody2D
 const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
 
 
+#region
+
+signal damage_taken
+#endregion
+
 #代码区域：准备就绪
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_stand: CollisionShape2D = $CollisionStand
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+@onready var da_stand: CollisionShape2D = %DAStand
+@onready var da_crouch: CollisionShape2D = %DACrouch
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var one_way_plat_form_shapecast: ShapeCast2D = $OneWayPlatFormShapecast
 @onready var attack_area: AttackArea = $AttackArea
 @onready var attack_sprite_2d: Sprite2D = %AttackSprite2D
+@onready var damage_area: DamageArea = %DamageAr
 
 #代码区域结束
 
@@ -65,6 +73,7 @@ func _ready() -> void:
 	self.call_deferred("reparent", get_tree().root)
 	Messages.player_healed.connect(_on_player_healed)
 	Messages.back_to_title_screen.connect(queue_free)
+	damage_area.damage_taken.connect( _on_damage_taken )
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -198,4 +207,13 @@ func add_debug_indicator(color: Color=Color.RED)-> void:
 func _on_player_healed(amount: float) -> void:
 	hp += amount
 	print("玩家血量恢复量：",amount)
+	pass
+
+@warning_ignore("shadowed_variable")
+func _on_damage_taken( attack_area: AttackArea ) -> void:
+	#减少生命值
+	hp -= attack_area.damage
+	#发出信号
+	damage_taken.emit()
+	print("玩家受到伤害")
 	pass
