@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://wi1l2spux25i" path="res://玩家/精灵图/weapon_smears.png" id="10_mnw4i"]
 [ext_resource type="Script" uid="uid://0rmcps26bvpw" path="res://general/scripts/attack_area.gd" id="12_an3sh"]
 [ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="16_ioqyp"]
+[ext_resource type="AudioStream" uid="uid://cunsjyg5y7o4s" path="res://general/audio/aargh.wav" id="17_ioqyp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8o6wb"]
 radius = 8.0
@@ -247,6 +248,22 @@ tracks/0/keys = {
 "values": [14, 15, 16, 17, 18, 19, 12, 13]
 }
 
+[sub_resource type="Animation" id="Animation_3825h"]
+resource_name = "take_damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [30]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_an3sh"]
 _data = {
 &"RESET": SubResource("Animation_8o6wb"),
@@ -255,7 +272,8 @@ _data = {
 &"crouch": SubResource("Animation_b2ecg"),
 &"idle": SubResource("Animation_xk5am"),
 &"jump": SubResource("Animation_umxay"),
-&"run": SubResource("Animation_75hda")
+&"run": SubResource("Animation_75hda"),
+&"take_damage": SubResource("Animation_3825h")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o6wb"]
@@ -314,6 +332,7 @@ script = ExtResource("8_d8244")
 [node name="TakeDamage" type="Node" parent="States" unique_id=615454517]
 unique_name_in_owner = true
 script = ExtResource("9_pig3d")
+invulnerable_duration = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602917418]
 position = Vector2(0, -39)
@@ -387,6 +406,7 @@ hframes = 16
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=478239649]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -26)
 collision_layer = 0
 collision_mask = 96
@@ -417,3 +437,7 @@ visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_b2ecg")
 disabled = true
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=1125851299]
+unique_name_in_owner = true
+stream = ExtResource("17_ioqyp")

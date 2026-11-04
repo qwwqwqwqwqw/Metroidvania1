@@ -1,6 +1,8 @@
 class_name  Player extends CharacterBody2D
 
 const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
+const WHITE_FLASH_SHADER = preload("res://materialsAndshaders/white_flash.gdshader")
+const DAMAGE_FLASH_INTERVAL: float = 0.06
 
 
 #region
@@ -18,7 +20,7 @@ signal damage_taken
 @onready var one_way_plat_form_shapecast: ShapeCast2D = $OneWayPlatFormShapecast
 @onready var attack_area: AttackArea = $AttackArea
 @onready var attack_sprite_2d: Sprite2D = %AttackSprite2D
-@onready var damage_area: DamageArea = %DamageAr
+@onready var damage_area: DamageArea = %DamageArea
 
 #代码区域结束
 
@@ -62,18 +64,22 @@ var morph_roll: bool = false
 #代码区域：标准变量
 var direction: Vector2=Vector2.ZERO
 var gravity: float=980
+var _damage_flash_material: ShaderMaterial
+var _damage_flash_tween: Tween
 #代码区域结束
 
 func _ready() -> void:
 	
 	if get_tree().get_first_node_in_group("Player") != self:
 		self.queue_free()
+	_setup_damage_flash_material()
 	#初始化状态
 	init_states()
 	self.call_deferred("reparent", get_tree().root)
 	Messages.player_healed.connect(_on_player_healed)
 	Messages.back_to_title_screen.connect(queue_free)
 	damage_area.damage_taken.connect( _on_damage_taken )
+	hp = max_hp
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -209,10 +215,41 @@ func _on_player_healed(amount: float) -> void:
 	print("玩家血量恢复量：",amount)
 	pass
 
-@warning_ignore("shadowed_variable")
-func _on_damage_taken( attack_area: AttackArea ) -> void:
+func start_invulnerability_flash(duration: float) -> void:
+	if _damage_flash_tween and _damage_flash_tween.is_valid():
+		_damage_flash_tween.kill()
+	_set_damage_flash_amount(0.0)
+	if duration <= 0.0:
+		return
+
+	var loop_count := maxi(1, ceili(duration / (DAMAGE_FLASH_INTERVAL * 2.0)))
+	_damage_flash_tween = create_tween()
+	_damage_flash_tween.set_loops(loop_count)
+	_damage_flash_tween.tween_callback(_set_damage_flash_amount.bind(1.0))
+	_damage_flash_tween.tween_interval(DAMAGE_FLASH_INTERVAL)
+	_damage_flash_tween.tween_callback(_set_damage_flash_amount.bind(0.0))
+	_damage_flash_tween.tween_interval(DAMAGE_FLASH_INTERVAL)
+	_damage_flash_tween.finished.connect(_on_damage_flash_finished)
+
+
+func _setup_damage_flash_material() -> void:
+	_damage_flash_material = ShaderMaterial.new()
+	_damage_flash_material.shader = WHITE_FLASH_SHADER
+	sprite_2d.material = _damage_flash_material
+
+
+func _set_damage_flash_amount(amount: float) -> void:
+	if _damage_flash_material:
+		_damage_flash_material.set_shader_parameter("flash_amount", amount)
+
+
+func _on_damage_flash_finished() -> void:
+	_set_damage_flash_amount(0.0)
+
+
+func _on_damage_taken(source_area: AttackArea) -> void:
 	#减少生命值
-	hp -= attack_area.damage
+	hp -= source_area.damage
 	#发出信号
 	damage_taken.emit()
 	print("玩家受到伤害")

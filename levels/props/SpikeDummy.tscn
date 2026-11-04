@@ -44,14 +44,16 @@ region_enabled = true
 region_rect = Rect2(33, 17, 14, 31)
 
 [node name="HazardArea" type="Area2D" parent="BodySprite2D" unique_id=1191197018]
-position = Vector2(0, 6)
+visible = false
+position = Vector2(0, -24)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("8_mcpby")
+damage = 10.0
 metadata/_custom_type_script = "uid://bames133o3ktl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodySprite2D/HazardArea" unique_id=1111673053]
-position = Vector2(0, -31.25)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_hqtg4")
 debug_color = Color(1, 0.010913014, 0, 0)
 
