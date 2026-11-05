@@ -94,6 +94,7 @@ func set_reverb(type: REVERB_TYPE) -> void:
 func play_spatial_sound(audio: AudioStream, pos: Vector2) -> void:
 	var ap: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	add_child(ap)
+	ap.global_position = pos
 	ap.bus ="SFX"
 	ap.stream = audio
 	ap.finished.connect(ap.queue_free)

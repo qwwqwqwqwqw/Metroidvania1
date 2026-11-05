@@ -1,7 +1,8 @@
 class_name PlayerstateFall  extends PlayerState
 
 @export var particle_settings: HitParticleSettings
- 
+@onready var land_audio: AudioStreamPlayer2D = %LandAudio
+
 func init() -> void:
 	#print("init!fall")
 	pass
@@ -9,6 +10,8 @@ func init() -> void:
 #当进入状态是会发生什么	
 func enter()-> void:
 	#print("enter!fall")
+	if player.jumpTimes == 2:
+		player.jumpTimes = 1
 	player.animation_player.play("jump")
 	player.animation_player.pause()
 	pass
@@ -44,6 +47,7 @@ func physics_process(_delta: float)-> PlayerState:
 	#print("pp:",name)
 	if player.is_on_floor():
 		#player.add_debug_indicator(Color.RED)
+		land_audio.play()
 		VisualEffects.land_dust(player.global_position)
 		VisualEffects.camera_shake()
 		return idle

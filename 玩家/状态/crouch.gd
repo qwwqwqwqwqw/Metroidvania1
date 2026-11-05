@@ -14,7 +14,10 @@ func enter()-> void:
 	player.collision_crouch.disabled=false
 	player.da_stand.disabled = true
 	player.da_crouch.disabled = false
-	player.jumpTimes = 2
+	if player.double_jump:
+		player.jumpTimes = 2
+	else:
+		player.jumpTimes = 1
 	pass
 	
 #当退出状态时会发生什么	

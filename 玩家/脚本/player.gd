@@ -27,7 +27,7 @@ signal damage_taken
 
 
 
-var jumpTimes:int = 2
+
 
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
@@ -52,7 +52,8 @@ var max_hp: float = 20.0:
 		max_hp = value
 		Messages.player_healed_changed.emit(hp,max_hp)
 var dash: bool = false
-var double_jump: bool = false
+var double_jump: bool = true
+var jumpTimes: int = 2
 var ground_slam: bool = false
 var morph_roll: bool = false
 #----------
@@ -73,6 +74,7 @@ func _ready() -> void:
 	if get_tree().get_first_node_in_group("Player") != self:
 		self.queue_free()
 	_setup_damage_flash_material()
+	
 	#初始化状态
 	init_states()
 	self.call_deferred("reparent", get_tree().root)

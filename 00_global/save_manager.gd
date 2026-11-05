@@ -117,6 +117,10 @@ func setup_player() -> void:
 	player.ground_slam = save_data.get("ground_slam", false)
 	player.dash = save_data.get("dash", false)
 	player.morph_roll = save_data.get("morph_roll", false)
+	if player.double_jump:
+		player.jumpTimes = 2
+	else:
+		player.jumpTimes = 1
 	pass
 
 

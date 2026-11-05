@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://0rmcps26bvpw" path="res://general/scripts/attack_area.gd" id="12_an3sh"]
 [ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="16_ioqyp"]
 [ext_resource type="AudioStream" uid="uid://cunsjyg5y7o4s" path="res://general/audio/aargh.wav" id="17_ioqyp"]
+[ext_resource type="AudioStream" uid="uid://ciocyabgn4lfu" path="res://general/audio/jump.wav" id="19_kyvye"]
+[ext_resource type="AudioStream" uid="uid://dvjgiw2k04sek" path="res://general/audio/land.wav" id="20_atq1v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8o6wb"]
 radius = 8.0
@@ -370,12 +372,10 @@ texture = ExtResource("10_mnw4i")
 hframes = 8
 
 [node name="CollisionStand" type="CollisionShape2D" parent="." unique_id=1050082777]
-visible = false
 position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_8o6wb")
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="." unique_id=1191321059]
-visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_b2ecg")
 disabled = true
@@ -392,7 +392,6 @@ text = "玩家"
 horizontal_alignment = 1
 
 [node name="OneWayPlatFormRaycast" type="RayCast2D" parent="." unique_id=1078847596]
-visible = false
 target_position = Vector2(0, 4)
 collision_mask = 2
 
@@ -401,7 +400,6 @@ libraries/ = SubResource("AnimationLibrary_an3sh")
 autoplay = &"idle"
 
 [node name="OneWayPlatFormShapecast" type="ShapeCast2D" parent="." unique_id=1255978521]
-visible = false
 position = Vector2(0, -3)
 enabled = false
 shape = SubResource("RectangleShape2D_8o6wb")
@@ -461,6 +459,19 @@ position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_b2ecg")
 disabled = true
 
-[node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=1125851299]
+[node name="AudioStreams" type="Node2D" parent="." unique_id=2131645560]
+position = Vector2(0, -24)
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="AudioStreams" unique_id=1125851299]
 unique_name_in_owner = true
 stream = ExtResource("17_ioqyp")
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="AudioStreams" unique_id=102314985]
+unique_name_in_owner = true
+stream = ExtResource("19_kyvye")
+bus = &"SFX"
+
+[node name="LandAudio" type="AudioStreamPlayer2D" parent="AudioStreams" unique_id=370483582]
+unique_name_in_owner = true
+stream = ExtResource("20_atq1v")
+bus = &"SFX"

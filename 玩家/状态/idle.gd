@@ -10,7 +10,10 @@ func init() -> void:
 func enter()-> void:
 	#print("enter!idle")
 	player.animation_player.play("idle")
-	player.jumpTimes = 2
+	if player.double_jump:
+		player.jumpTimes = 2
+	else:
+		player.jumpTimes = 1
 	pass
 	
 #当退出状态时会发生什么	

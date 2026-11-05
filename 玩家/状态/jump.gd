@@ -1,5 +1,6 @@
 class_name PlayerstateJump  extends PlayerState
 
+@onready var jump_audio: AudioStreamPlayer2D = %JumpAudio
 
 
 func init() -> void:
@@ -10,6 +11,7 @@ func init() -> void:
 func enter()-> void:
 	#print("enter!jump")
 	player.animation_player.play("jump")
+	jump_audio.play()
 	VisualEffects.jump_dust(player.global_position)
 	player.animation_player.pause()
 	#player.add_debug_indicator(Color.AQUAMARINE)
