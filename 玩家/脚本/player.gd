@@ -252,5 +252,7 @@ func _on_damage_taken(source_area: AttackArea) -> void:
 	hp -= source_area.damage
 	#发出信号
 	damage_taken.emit()
+	if hp == 0:
+		Messages.player_die.emit()
 	print("玩家受到伤害")
 	pass

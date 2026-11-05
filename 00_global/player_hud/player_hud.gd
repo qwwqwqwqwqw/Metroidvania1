@@ -5,6 +5,10 @@ extends CanvasLayer
 @onready var hp_margin_container: MarginContainer = %HPMarginContainer
 @onready var h_pbar: TextureProgressBar = %HPbar
 @onready var delayed_hp_bar: TextureProgressBar = %DelayedHPbar
+@onready var game_over: Control = %GameOver
+@onready var load_button: Button = %LoadButton
+@onready var quit_button: Button = %QuitButton
+
 
 var _delayed_bar_tween: Tween
 
@@ -14,6 +18,10 @@ func _ready() -> void:
 	delayed_hp_bar.max_value = h_pbar.max_value
 	delayed_hp_bar.value = h_pbar.value
 	delayed_hp_bar.modulate.a = 0.55
+	game_over.visible = false
+	load_button.pressed.connect(_on_load_pressed)
+	quit_button.pressed.connect(_on_quit_pressed)
+	Messages.player_die.connect(show_game_over)
 	pass
 
 
@@ -44,3 +52,37 @@ func _tween_delayed_health(target_value: float) -> void:
 func _stop_delayed_bar_tween() -> void:
 	if _delayed_bar_tween and _delayed_bar_tween.is_valid():
 		_delayed_bar_tween.kill()
+
+func show_game_over() -> void:
+	get_tree().paused = true
+	load_button.visible = false
+	quit_button.visible = false
+
+	game_over.modulate.a = 0
+	game_over.visible = true
+	var tween: Tween = create_tween()
+	tween.tween_property(game_over, "modulate", Color.WHITE, 3.0)
+	await  tween.finished
+
+	load_button.visible = true
+	quit_button.visible = true
+
+	load_button.grab_focus()
+	pass
+
+
+func clear_game_over() -> void:
+	game_over.visible = false
+	get_tree().paused = false
+
+
+func _on_load_pressed() -> void:
+	SaveManager.load_game(SaveManager.currrent_slot)
+	clear_game_over()
+	pass
+
+
+func _on_quit_pressed() -> void:
+	SceneManager.transition_scene("res://title_scream/title_scream.tscn", "",  Vector2.ZERO, "up")
+	clear_game_over()
+	pass
