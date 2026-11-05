@@ -28,20 +28,22 @@ tile_set = ExtResource("1_5iu78")
 position = Vector2(88, 195)
 
 [node name="LevelTransition" parent="." unique_id=2128836170 instance=ExtResource("3_ocngb")]
-position = Vector2(0, 193)
+position = Vector2(-96, 193)
 size = 3
 target_level = "uid://dc2m2cv5i7d8d"
 target_area_name = "LevelTransition3"
 
 [node name="LevelTransition2" parent="." unique_id=104079546 instance=ExtResource("3_ocngb")]
-position = Vector2(388, 192)
+position = Vector2(446, 193)
 size = 3
 location = 1
 target_level = "uid://cblwcalbpdc64"
 
 [node name="LevelBounds" type="Node2D" parent="." unique_id=83072049]
 z_index = 256
+position = Vector2(-127, 3)
 script = ExtResource("2_e8knj")
+width = 608
 metadata/_custom_type_script = "uid://dtu1soyslahj5"
 
 [node name="Props" type="Node2D" parent="." unique_id=1062123149]

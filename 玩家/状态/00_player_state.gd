@@ -12,6 +12,8 @@ var nextState: PlayerState
 @onready var crouch: PlayerstateCrouch = %crouch
 @onready var attack: PlayerStateAttack = %attack
 @onready var take_damage: Node = %TakeDamage
+@onready var death: PlayerstateDeath = %Death
+
 
 
 #代码区域

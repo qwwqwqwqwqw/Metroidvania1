@@ -22,8 +22,8 @@ colors = PackedColorArray(1, 0, 0.6634264, 1, 1, 0.26502317, 0, 1)
 gradient = SubResource("Gradient_26715")
 
 [node name="PlayerHud" type="CanvasLayer" unique_id=634315296]
-layer = 2
 process_mode = 3
+layer = 2
 script = ExtResource("1_vb1bs")
 
 [node name="Control" type="Control" parent="." unique_id=1404865896]
