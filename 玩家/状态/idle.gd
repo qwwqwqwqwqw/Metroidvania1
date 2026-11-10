@@ -10,10 +10,11 @@ func init() -> void:
 func enter()-> void:
 	#print("enter!idle")
 	player.animation_player.play("idle")
-	if player.double_jump:
-		player.jumpTimes = 2
-	else:
-		player.jumpTimes = 1
+	if player.is_on_floor():
+		if player.double_jump:
+			player.jumpTimes = 2
+		else:
+			player.jumpTimes = 1
 	pass
 	
 #当退出状态时会发生什么	
@@ -24,6 +25,8 @@ func exit()-> void:
 
 #处理输入发生的事件
 func handle_input(event: InputEvent)-> PlayerState:
+	if event.is_action_pressed("dash") and player.consume_dash():
+		return dash
 	if event.is_action_pressed("attack"):
 		return attack
 	if event.is_action_pressed("jump"):

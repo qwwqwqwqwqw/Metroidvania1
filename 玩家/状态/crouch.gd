@@ -14,10 +14,11 @@ func enter()-> void:
 	player.collision_crouch.disabled=false
 	player.da_stand.disabled = true
 	player.da_crouch.disabled = false
-	if player.double_jump:
-		player.jumpTimes = 2
-	else:
-		player.jumpTimes = 1
+	if player.is_on_floor():
+		if player.double_jump:
+			player.jumpTimes = 2
+		else:
+			player.jumpTimes = 1
 	pass
 	
 #当退出状态时会发生什么	
@@ -32,6 +33,8 @@ func exit()-> void:
 
 #处理输入发生的事件
 func handle_input(event: InputEvent)-> PlayerState:
+	if event.is_action_pressed("dash") and player.consume_dash():
+		return dash
 	if event.is_action_pressed("attack"):
 
 		return attack
@@ -43,7 +46,7 @@ func handle_input(event: InputEvent)-> PlayerState:
 		return jump
 	return null
 	
-	
+	-0
 
 #状态过程中发生的事
 func process(_delta: float)-> PlayerState:

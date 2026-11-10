@@ -11,8 +11,9 @@ var nextState: PlayerState
 @onready var fall:PlayerstateFall=%fall
 @onready var crouch: PlayerstateCrouch = %crouch
 @onready var attack: PlayerStateAttack = %attack
-@onready var take_damage: Node = %TakeDamage
+@onready var take_damage: PlayerstateTakeDamage = %TakeDamage
 @onready var death: PlayerstateDeath = %Death
+@onready var dash: PlayerstateDash = %Dash
 
 
 

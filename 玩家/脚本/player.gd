@@ -3,6 +3,7 @@ class_name  Player extends CharacterBody2D
 const DEBUG_JUMP_INDICATOR = preload("uid://ca5yc4awm2ua3")
 const WHITE_FLASH_SHADER = preload("res://materialsAndshaders/white_flash.gdshader")
 const DAMAGE_FLASH_INTERVAL: float = 0.06
+const MAX_DASH_CHARGES: int = 2
 
 
 #region
@@ -11,7 +12,7 @@ signal damage_taken
 #endregion
 
 #代码区域：准备就绪
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: PlayerSprite = $Sprite2D
 @onready var collision_stand: CollisionShape2D = $CollisionStand
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
 @onready var da_stand: CollisionShape2D = %DAStand
@@ -32,6 +33,7 @@ signal damage_taken
 @export var move_speed: float=150.0
 @export var jump_speed: float=450.0
 @export var max_fall_speed: float=600.0
+@export var dash_recharge_time: float = 1.0
 
 
 #代码区域：状态机所需要的值
@@ -51,9 +53,11 @@ var max_hp: float = 20.0:
 	set(value):
 		max_hp = value
 		Messages.player_healed_changed.emit(hp,max_hp)
-var dash: bool = false
+var dash: bool = true
 var double_jump: bool = true
 var jumpTimes: int = 2
+var dash_charges: int = MAX_DASH_CHARGES
+var dash_recharge_remaining: float = 0.0
 var ground_slam: bool = false
 var morph_roll: bool = false
 #----------
@@ -122,7 +126,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
-	
+	update_dash_recharge(_delta)
 	
 	if !self.is_on_floor():
 		velocity.y+=gravity*_delta
@@ -133,6 +137,35 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	pass
+
+
+func can_dash() -> bool:
+	return dash and dash_charges > 0
+
+
+func consume_dash() -> bool:
+	if not can_dash():
+		return false
+	dash_charges -= 1
+	return true
+
+
+func update_dash_recharge(delta: float) -> void:
+	if not dash:
+		return
+	if currentState == %Dash:
+		return
+	if dash_charges >= MAX_DASH_CHARGES:
+		dash_recharge_remaining = 0.0
+		return
+
+	dash_recharge_remaining -= delta
+	if dash_recharge_remaining <= 0.0:
+		dash_charges += 1
+		if dash_charges < MAX_DASH_CHARGES:
+			dash_recharge_remaining = dash_recharge_time
+		else:
+			dash_recharge_remaining = 0.0
 
 
 func init_states()-> void:

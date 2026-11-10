@@ -40,6 +40,8 @@ func handle_input(event: InputEvent)-> PlayerState:
 		return jump
 	if event.is_action_pressed("attack"):
 		timer = combo_time_window
+	if event.is_action_pressed("dash") and player.consume_dash():
+		return dash
 	
 
 	return null

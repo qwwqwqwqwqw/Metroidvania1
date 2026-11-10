@@ -10,6 +10,8 @@ func init() -> void:
 #当进入状态是会发生什么	
 func enter()-> void:
 	#print("enter!jump")
+	if player.jumpTimes <= 0:
+		return
 	player.animation_player.play("jump")
 	jump_audio.play()
 	VisualEffects.jump_dust(player.global_position)
@@ -28,6 +30,8 @@ func exit()-> void:
 
 #处理输入发生的事件
 func handle_input(event: InputEvent)-> PlayerState:
+	if event.is_action_pressed("dash") and player.consume_dash():
+		return dash
 	if event.is_action_pressed("attack"):
 		return attack
 	if event.is_action_released("jump"):

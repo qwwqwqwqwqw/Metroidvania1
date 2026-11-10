@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="银河恶魔城"
-run/main_scene="uid://c6u4gg3l6pmur"
+run/main_scene="uid://baep1wo2fy402"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://kgrsxcprrcg6"
 

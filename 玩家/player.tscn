@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://sehxjlsnqgnu" path="res://玩家/精灵图/input_icons.png" id="9_umxay"]
 [ext_resource type="Script" uid="uid://b38gomkim2ml0" path="res://玩家/状态/death.gd" id="10_3825h"]
 [ext_resource type="Texture2D" uid="uid://wi1l2spux25i" path="res://玩家/精灵图/weapon_smears.png" id="10_mnw4i"]
+[ext_resource type="Script" uid="uid://bg5vygpd77cvu" path="res://玩家/状态/dash.gd" id="11_d08ep"]
 [ext_resource type="Script" uid="uid://0rmcps26bvpw" path="res://general/scripts/attack_area.gd" id="12_an3sh"]
+[ext_resource type="Script" uid="uid://bf5kt2bty6rc4" path="res://玩家/脚本/player_sprite.gd" id="13_d2y6h"]
 [ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="16_ioqyp"]
 [ext_resource type="AudioStream" uid="uid://cunsjyg5y7o4s" path="res://general/audio/aargh.wav" id="17_ioqyp"]
 [ext_resource type="AudioStream" uid="uid://ciocyabgn4lfu" path="res://general/audio/jump.wav" id="19_kyvye"]
@@ -202,6 +204,21 @@ tracks/0/keys = {
 "values": [20, 21, 22, 23]
 }
 
+[sub_resource type="Animation" id="Animation_d08ep"]
+resource_name = "dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [29]
+}
+
 [sub_resource type="Animation" id="Animation_kyvye"]
 resource_name = "death"
 length = 1.4
@@ -290,6 +307,7 @@ _data = {
 &"attack": SubResource("Animation_pig3d"),
 &"attack_2": SubResource("Animation_ioqyp"),
 &"crouch": SubResource("Animation_b2ecg"),
+&"dash": SubResource("Animation_d08ep"),
 &"death": SubResource("Animation_kyvye"),
 &"idle": SubResource("Animation_xk5am"),
 &"jump": SubResource("Animation_umxay"),
@@ -359,11 +377,17 @@ invulnerable_duration = 0.8
 unique_name_in_owner = true
 script = ExtResource("10_3825h")
 
+[node name="Dash" type="Node" parent="States" unique_id=275730552]
+unique_name_in_owner = true
+script = ExtResource("11_d08ep")
+speed = 500.0
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602917418]
 position = Vector2(0, -39)
 texture = ExtResource("7_8o6wb")
 hframes = 16
 vframes = 4
+script = ExtResource("13_d2y6h")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D" unique_id=1376273917]
 unique_name_in_owner = true
