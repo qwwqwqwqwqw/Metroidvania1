@@ -58,7 +58,7 @@ var double_jump: bool = true
 var jumpTimes: int = 2
 var dash_charges: int = MAX_DASH_CHARGES
 var dash_recharge_remaining: float = 0.0
-var ground_slam: bool = false
+var ground_slam: bool = true
 var morph_roll: bool = false
 #----------
 
@@ -257,6 +257,7 @@ func start_invulnerability_flash(duration: float) -> void:
 	if duration <= 0.0:
 		return
 
+	_attach_damage_flash_material()
 	var loop_count := maxi(1, ceili(duration / (DAMAGE_FLASH_INTERVAL * 2.0)))
 	_damage_flash_tween = create_tween()
 	_damage_flash_tween.set_loops(loop_count)
@@ -270,7 +271,16 @@ func start_invulnerability_flash(duration: float) -> void:
 func _setup_damage_flash_material() -> void:
 	_damage_flash_material = ShaderMaterial.new()
 	_damage_flash_material.shader = WHITE_FLASH_SHADER
-	sprite_2d.material = _damage_flash_material
+
+
+func _attach_damage_flash_material() -> void:
+	if _damage_flash_material and sprite_2d.material != _damage_flash_material:
+		sprite_2d.material = _damage_flash_material
+
+
+func _detach_damage_flash_material() -> void:
+	if sprite_2d.material == _damage_flash_material:
+		sprite_2d.material = null
 
 
 func _set_damage_flash_amount(amount: float) -> void:
@@ -280,6 +290,7 @@ func _set_damage_flash_amount(amount: float) -> void:
 
 func _on_damage_flash_finished() -> void:
 	_set_damage_flash_amount(0.0)
+	_detach_damage_flash_material()
 
 
 func _on_damage_taken(source_area: AttackArea) -> void:

@@ -14,6 +14,7 @@ var nextState: PlayerState
 @onready var take_damage: PlayerstateTakeDamage = %TakeDamage
 @onready var death: PlayerstateDeath = %Death
 @onready var dash: PlayerstateDash = %Dash
+@onready var ground_slam: PlayerstateGroundSlam = %GroundSlam
 
 
 

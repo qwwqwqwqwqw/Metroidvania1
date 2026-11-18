@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://wi1l2spux25i" path="res://玩家/精灵图/weapon_smears.png" id="10_mnw4i"]
 [ext_resource type="Script" uid="uid://bg5vygpd77cvu" path="res://玩家/状态/dash.gd" id="11_d08ep"]
 [ext_resource type="Script" uid="uid://0rmcps26bvpw" path="res://general/scripts/attack_area.gd" id="12_an3sh"]
+[ext_resource type="Script" uid="uid://dh5imntddvtqb" path="res://玩家/状态/ground_stam.gd" id="12_bleks"]
 [ext_resource type="Script" uid="uid://bf5kt2bty6rc4" path="res://玩家/脚本/player_sprite.gd" id="13_d2y6h"]
 [ext_resource type="Script" uid="uid://dtk71i48oihoh" path="res://general/scripts/damage_area.gd" id="16_ioqyp"]
 [ext_resource type="AudioStream" uid="uid://cunsjyg5y7o4s" path="res://general/audio/aargh.wav" id="17_ioqyp"]
@@ -236,6 +237,21 @@ tracks/0/keys = {
 "values": [47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 }
 
+[sub_resource type="Animation" id="Animation_bleks"]
+resource_name = "ground_stam"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [43]
+}
+
 [sub_resource type="Animation" id="Animation_xk5am"]
 resource_name = "idle"
 tracks/0/type = "value"
@@ -309,6 +325,7 @@ _data = {
 &"crouch": SubResource("Animation_b2ecg"),
 &"dash": SubResource("Animation_d08ep"),
 &"death": SubResource("Animation_kyvye"),
+&"ground_stam": SubResource("Animation_bleks"),
 &"idle": SubResource("Animation_xk5am"),
 &"jump": SubResource("Animation_umxay"),
 &"run": SubResource("Animation_75hda"),
@@ -316,7 +333,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o6wb"]
-size = Vector2(16, 3)
+size = Vector2(22, 6)
 
 [sub_resource type="Gradient" id="Gradient_8o6wb"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -332,6 +349,9 @@ metadata/_snap_enabled = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpy4q"]
 size = Vector2(66, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bleks"]
+size = Vector2(34, 57)
 
 [node name="玩家" type="CharacterBody2D" unique_id=248145941 groups=["Player"]]
 z_index = 1
@@ -382,6 +402,11 @@ unique_name_in_owner = true
 script = ExtResource("11_d08ep")
 speed = 500.0
 
+[node name="GroundSlam" type="Node" parent="States" unique_id=1901235223]
+unique_name_in_owner = true
+script = ExtResource("12_bleks")
+velocity = 600.0
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1602917418]
 position = Vector2(0, -39)
 texture = ExtResource("7_8o6wb")
@@ -431,6 +456,13 @@ target_position = Vector2(0, 6)
 max_results = 12
 collision_mask = 2
 
+[node name="GroundSlamShapecast" type="ShapeCast2D" parent="." unique_id=290876906]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_8o6wb")
+target_position = Vector2(0, 6)
+max_results = 4
+collision_mask = 192
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1720383693]
 position = Vector2(0, -40)
 script = ExtResource("8_umxay")
@@ -461,6 +493,20 @@ metadata/_custom_type_script = "uid://0rmcps26bvpw"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1284870818]
 position = Vector2(33, 0)
 shape = SubResource("RectangleShape2D_kpy4q")
+debug_color = Color(1, 0.09118253, 0.0045692325, 0.41960785)
+
+[node name="GroundSlamAttackArea" type="Area2D" parent="." unique_id=1402843226]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -26)
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("12_an3sh")
+metadata/_custom_type_script = "uid://0rmcps26bvpw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundSlamAttackArea" unique_id=2072430927]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_bleks")
 debug_color = Color(1, 0.09118253, 0.0045692325, 0.41960785)
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1253928886]

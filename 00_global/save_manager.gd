@@ -47,7 +47,7 @@ func creat_new_game_save(slot: int) -> void:
 		"max_hp" : 20,
 		"double_jump" : false,
 		"dash" : false,
-		"ground_slam" : false,
+		"ground_slam" : true,
 		"morph_roll" : false,
 		"discovered_areas" : discovered_areas,
 		"persistent_data" : persistent_data,
@@ -69,7 +69,7 @@ func save_game(slot: int) -> void:
 		"max_hp" : player.max_hp,
 		"double_jump" : player.double_jump,
 		"dash" : player.dash,
-		"ground_slam" : player.ground_slam,
+		"ground_slam" : player.ground_stam,
 		"morph_roll" : player.morph_roll,
 		"discovered_areas" : discovered_areas,
 		"persistent_data" : persistent_data,
@@ -114,7 +114,7 @@ func setup_player() -> void:
 	)
 	
 	player.double_jump = save_data.get("double_jump", false)
-	player.ground_slam = save_data.get("ground_slam", false)
+	player.ground_slam = save_data.get("ground_slam", true)
 	player.dash = save_data.get("dash", false)
 	player.morph_roll = save_data.get("morph_roll", false)
 	if player.double_jump:

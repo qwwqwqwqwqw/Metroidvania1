@@ -33,6 +33,7 @@ func enter()-> void:
 	
 #当退出状态时会发生什么	
 func exit()-> void:
+	player.sprite_2d.reset_color()
 	if player.dash_charges < player.MAX_DASH_CHARGES \
 			and player.dash_recharge_remaining <= 0.0:
 		player.dash_recharge_remaining = player.dash_recharge_time

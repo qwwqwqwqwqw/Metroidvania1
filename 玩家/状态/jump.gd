@@ -33,6 +33,8 @@ func handle_input(event: InputEvent)-> PlayerState:
 	if event.is_action_pressed("dash") and player.consume_dash():
 		return dash
 	if event.is_action_pressed("attack"):
+		if player.ground_slam and Input.is_action_pressed("down"):
+			return ground_slam
 		return attack
 	if event.is_action_released("jump"):
 		player.velocity.y *= 0.5
